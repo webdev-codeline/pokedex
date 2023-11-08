@@ -22,6 +22,7 @@ type TData = {
   baseStatsTotal: number;
   baseStatsText: string;
   stats: TStat[];
+  // ! beware evolutionIds maximum is 6
   evolutionIds: number[];
 };
 
@@ -339,7 +340,7 @@ const EvolutionContainer = styled.View<TStyledComponent>`
   width: 95%;
   height: 150px;
   padding: 16px;
-  margin-bottom: 200px;
+  margin-bottom: 120px;
   border-radius: 40px;
   background-color: ${(props) => props.bgcolor ?? '#000'};
 `;
