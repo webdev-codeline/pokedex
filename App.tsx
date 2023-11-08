@@ -7,9 +7,10 @@ import React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import Constants from 'expo-constants';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 // redux
-import { store } from '@redux/store';
+import { persistor, store } from '@redux/store';
 
 // configs
 import client from './client';
@@ -24,12 +25,14 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName='Home'>
-            <Stack.Screen name='Home' component={Home} />
-            <Stack.Screen name='Details' component={Details} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <PersistGate loading={null} persistor={persistor}>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName='Home'>
+              <Stack.Screen name='Home' component={Home} />
+              <Stack.Screen name='Details' component={Details} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </PersistGate>
       </Provider>
     </ApolloProvider>
   );
