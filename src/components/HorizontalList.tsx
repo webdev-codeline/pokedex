@@ -14,21 +14,7 @@ export const HorizontalList = ({ data, title, emptyMessage }: TList) => {
     <ListContainer>
       <ListTitle>{title}</ListTitle>
       {data && data[0] ? (
-        <FlatList
-          horizontal
-          data={data}
-          renderItem={({ item, index }) => (
-            <Card
-              key={index}
-              Icon={item.Icon}
-              details={item.details}
-              name={item.name}
-              spriteBack={item.spriteBack}
-              spriteUrl={item.spriteUrl}
-              types={item.types}
-            />
-          )}
-        />
+        <FlatList horizontal data={data} renderItem={({ item, index }) => <Card key={index} id={item.id} />} />
       ) : (
         <ListEmptyContainer>
           <ListEmpty>{emptyMessage ?? 'No Data yet!'}</ListEmpty>
