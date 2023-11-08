@@ -35,6 +35,7 @@
       "@/*": ["src/*"],
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
+      "@constants/*": ["src/constatns/*"],
       "@features/*": ["src/features/*"],
       "@graphql/*": ["src/graphql/*"],
       "@hooks/*": ["src/hooks/*"],

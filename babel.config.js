@@ -14,6 +14,7 @@ module.exports = function (api) {
             '@': './src',
             '@assets': './src/assets',
             '@components': './src/components',
+            '@constants': './src/constants',
             '@features': './src/features',
             '@graphql': './src/graphql',
             '@hooks': './src/hooks',
