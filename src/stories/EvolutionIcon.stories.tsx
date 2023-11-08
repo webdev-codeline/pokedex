@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { EvolutionIcon } from '../components/EvolutionIcon';
+import { EvolutionIcon } from '@components/EvolutionIcon';
 
 type TIconDataProps = {
   title: string;
