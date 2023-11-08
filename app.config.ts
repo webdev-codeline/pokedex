@@ -28,4 +28,7 @@ export default ({ config }: any) => ({
   extra: {
     storybookEnabled: process.env.STORYBOOK_ENABLED,
   },
+  experiments: {
+    tsconfigPaths: true,
+  },
 });
