@@ -33,3 +33,6 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# auto generated file by storybook
+.storybook/storybook.requires.js
