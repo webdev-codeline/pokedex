@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { SvgProps } from 'react-native-svg';
 import { colors } from '../utils/pokemonTypeColors.helper';
-import { IconFiles, IconNames } from 'src/utils/iconNames.helper';
+import { IconFiles, IconNames } from '../utils/iconNames.helper';
 
 type TText = {
   color: string;
