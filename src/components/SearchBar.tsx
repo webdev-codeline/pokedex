@@ -23,8 +23,6 @@ export const SearchBar: FC<SearchBarProps> = ({ searchText, onChangeTextCallback
 };
 
 const SearchBarContainer = styled.View`
-  width: 100%;
-  height: 80px;
   margin: 10px 0;
   display: flex;
   flex-direction: column;
@@ -33,22 +31,12 @@ const SearchBarContainer = styled.View`
 `;
 
 const SearchInput = styled.TextInput`
-  border: none;
   background-color: transparent;
   font-size: 14px;
   padding: 5px;
   color: #000;
   text-decoration: none;
   width: 200px;
-
-  &:focus {
-    outline: none;
-    text-decoration: none;
-  }
-
-  &::placeholder {
-    color: #858585;
-  }
 `;
 
 const SearchUnderline = styled.View`
