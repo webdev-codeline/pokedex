@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { PokemonTypes } from '@/types/color';
-import { ScrollView } from 'react-native';
+import { ActivityIndicator, ScrollView } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 import { styled } from 'styled-components/native';
-import { EvolutionIcon } from '../components/EvolutionIcon';
-import { Stat } from '../components/Stat';
-import { colors, toDarkKey } from '../utils/colors.helper';
+import { EvolutionIcon } from '@components/EvolutionIcon';
+import { PokemonTypes } from '@/types/color';
+import { Stat } from '@components/Stat';
+import { colors, toDarkKey } from '@utils/colors.helper';
 
 type TStat = {
   name: string;
@@ -40,86 +40,98 @@ type TStyledComponent = {
 };
 
 export const Details = ({ Icon, typeColor, darkenTypeColor, data }: TDetails) => {
+  const [loading, setLoading] = useState(true);
+
+  setInterval(() => {
+    setLoading(false);
+  }, 3000);
+
   return (
     <ScrollView>
-      <Container>
-        {/* header starts here */}
-        <Header>
-          <HeaderMainBG bgcolor={typeColor}>
-            <TypeIcon borderColor={darkenTypeColor}>
-              <Icon width={52} height={52} />
-            </TypeIcon>
+      {loading ? (
+        <LoadingContainer>
+          <ActivityIndicator size='large' color={typeColor} />
+        </LoadingContainer>
+      ) : (
+        <Container>
+          {/* header starts here */}
+          <Header>
+            <HeaderMainBG bgcolor={typeColor}>
+              <TypeIcon borderColor={darkenTypeColor}>
+                <Icon width={52} height={52} />
+              </TypeIcon>
 
-            <IdContainer bgcolor={darkenTypeColor}>
-              <IdNumber>{data.id}</IdNumber>
-            </IdContainer>
+              <IdContainer bgcolor={darkenTypeColor}>
+                <IdNumber>{data.id}</IdNumber>
+              </IdContainer>
 
-            <TypesContainer>
-              {data.types.map((type, index) => (
-                <Type key={index} bgcolor={colors[toDarkKey(type)]}>
-                  {type}
-                </Type>
-              ))}
-            </TypesContainer>
+              <TypesContainer>
+                {data.types.map((type, index) => (
+                  <Type key={index} bgcolor={colors[toDarkKey(type)]}>
+                    {type}
+                  </Type>
+                ))}
+              </TypesContainer>
 
-            <AbilitiesContainer bgcolor={darkenTypeColor}>
-              <AbilitiesTitle>Abilities</AbilitiesTitle>
-              {data.abilities.map((ability, index) => (
-                <Ability key={index}>{ability}</Ability>
-              ))}
-            </AbilitiesContainer>
+              <AbilitiesContainer bgcolor={darkenTypeColor}>
+                <AbilitiesTitle>Abilities</AbilitiesTitle>
+                {data.abilities.map((ability, index) => (
+                  <Ability key={index}>{ability}</Ability>
+                ))}
+              </AbilitiesContainer>
 
-            <Avatar
-              source={{
-                uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id + '.png'}`,
-              }}
-              style={{ width: 350, height: 350 }}
-            />
+              <Avatar
+                source={{
+                  uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id + '.png'}`,
+                }}
+                style={{ width: 350, height: 350 }}
+              />
 
-            <MainDetailsContainer>
-              <Name>{data.name.toUpperCase()}</Name>
-              <Evolution>Evolution Pokémon</Evolution>
-              <PhysicalContainer>
-                <PhysicalDetails>
-                  <PhysicalTitle>Height</PhysicalTitle>
-                  <PhysicalValue>{data.height} m</PhysicalValue>
-                </PhysicalDetails>
-                <PhysicalDetails>
-                  <PhysicalTitle>Weight</PhysicalTitle>
-                  <PhysicalValue>{data.weight} kg</PhysicalValue>
-                </PhysicalDetails>
-              </PhysicalContainer>
-            </MainDetailsContainer>
-          </HeaderMainBG>
-        </Header>
-        {/* header ends here */}
+              <MainDetailsContainer>
+                <Name>{data.name.toUpperCase()}</Name>
+                <Evolution>Evolution Pokémon</Evolution>
+                <PhysicalContainer>
+                  <PhysicalDetails>
+                    <PhysicalTitle>Height</PhysicalTitle>
+                    <PhysicalValue>{data.height} m</PhysicalValue>
+                  </PhysicalDetails>
+                  <PhysicalDetails>
+                    <PhysicalTitle>Weight</PhysicalTitle>
+                    <PhysicalValue>{data.weight} kg</PhysicalValue>
+                  </PhysicalDetails>
+                </PhysicalContainer>
+              </MainDetailsContainer>
+            </HeaderMainBG>
+          </Header>
+          {/* header ends here */}
 
-        <BaseContainer>
-          <BaseTitleWrapper>
-            <BaseTitle>Base stats total</BaseTitle>
-            <BasePoint color={darkenTypeColor}>{data.baseStatsTotal}</BasePoint>
-          </BaseTitleWrapper>
-          <BaseText bgcolor={typeColor}>{data.baseStatsText}</BaseText>
-        </BaseContainer>
+          <BaseContainer>
+            <BaseTitleWrapper>
+              <BaseTitle>Base stats total</BaseTitle>
+              <BasePoint color={darkenTypeColor}>{data.baseStatsTotal}</BasePoint>
+            </BaseTitleWrapper>
+            <BaseText bgcolor={typeColor}>{data.baseStatsText}</BaseText>
+          </BaseContainer>
 
-        <StatsContainer>
-          {data.stats.map((stat, index) => (
-            <Stat key={index} value={stat.value} name={stat.name} typeColor={darkenTypeColor} />
-          ))}
-        </StatsContainer>
-
-        <EvolutionContainer bgcolor={typeColor}>
-          <EvolutionTitle>Evolutions</EvolutionTitle>
-          <EvolutionHeadIcon>
-            <EvolutionIcon pokemonId={data.id} />
-          </EvolutionHeadIcon>
-          <EvolutionTreeIcons>
-            {data.evolutionIds.map((id, index) => (
-              <EvolutionIcon pokemonId={id} key={index} />
+          <StatsContainer>
+            {data.stats.map((stat, index) => (
+              <Stat key={index} value={stat.value} name={stat.name} typeColor={darkenTypeColor} />
             ))}
-          </EvolutionTreeIcons>
-        </EvolutionContainer>
-      </Container>
+          </StatsContainer>
+
+          <EvolutionContainer bgcolor={typeColor}>
+            <EvolutionTitle>Evolutions</EvolutionTitle>
+            <EvolutionHeadIcon>
+              <EvolutionIcon pokemonId={data.id} />
+            </EvolutionHeadIcon>
+            <EvolutionTreeIcons>
+              {data.evolutionIds.map((id, index) => (
+                <EvolutionIcon pokemonId={id} key={index} />
+              ))}
+            </EvolutionTreeIcons>
+          </EvolutionContainer>
+        </Container>
+      )}
     </ScrollView>
   );
 };
@@ -380,4 +392,13 @@ const EvolutionTreeIcons = styled.View`
   right: -30px;
   width: 75%;
   height: 200px;
+`;
+
+const LoadingContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
 `;
