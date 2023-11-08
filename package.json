@@ -7,7 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "generate": "graphql-codegen --config codegen.js",
+    "generate": "graphql-codegen --config codegen.ts",
     "generate:watch": "bun run generate --watch",
     "storybook-generate": "sb-rn-get-stories",
     "storybook-watch": "sb-rn-watcher",

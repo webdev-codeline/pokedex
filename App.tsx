@@ -11,12 +11,14 @@ import client from './client';
 
 // styles
 import { SafeView } from './App.styles';
+import { Demo } from './src/components/Demo';
 
 function App() {
   return (
     <SafeView>
       <ApolloProvider client={client}>
         <Text>Hello</Text>
+        <Demo></Demo>
       </ApolloProvider>
     </SafeView>
   );

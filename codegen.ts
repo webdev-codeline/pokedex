@@ -1,5 +1,5 @@
 module.exports = {
-  schema: '',
+  schema: 'https://beta.pokeapi.co/graphql/v1beta',
   documents: ['./src/graphql/*.graphql'],
   overwrite: true,
   generates: {

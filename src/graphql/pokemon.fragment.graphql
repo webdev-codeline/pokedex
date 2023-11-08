@@ -1,0 +1,38 @@
+fragment PokemonStat on pokemon_v2_pokemon {
+  name
+  height
+  weight
+  stats: pokemon_v2_pokemonstats {
+    base_stat
+    info: pokemon_v2_stat {
+      name
+    }
+  }
+}
+
+fragment PokemonAbility on pokemon_v2_pokemonability {
+  ability: pokemon_v2_ability {
+    name
+  }
+}
+
+fragment PokemonMove on pokemon_v2_pokemonmove {
+  move: pokemon_v2_move {
+    name
+  }
+}
+
+fragment PokemonType on pokemon_v2_pokemontype {
+  type: pokemon_v2_type {
+    name
+  }
+}
+
+fragment PokemonSpecy on pokemon_v2_pokemonspecies {
+  evolves_from_species_id
+}
+
+fragment PokemonDecendent on pokemon_v2_pokemon {
+  id
+  name
+}
