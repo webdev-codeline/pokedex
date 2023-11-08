@@ -1,10 +1,7 @@
-import { HorizontalList } from '../components/HorizontalList';
+import { HorizontalList } from '@components/HorizontalList';
 import React from 'react';
 import { View } from 'react-native';
-
-type PokemonData = {
-  id: number;
-};
+import { CardProps } from '@components/Card';
 
 type TListDataProps = {
   title: string;
@@ -16,7 +13,7 @@ type TListDataProps = {
 type TArgs = {
   title: string;
   emptyMessage: string;
-  data: PokemonData[];
+  data: CardProps[];
 };
 
 const ListData: TListDataProps = {
@@ -28,9 +25,15 @@ const ListData: TListDataProps = {
     data: [
       {
         id: 2,
+        name: 'eevee',
+        types: ['grass', 'poison'],
+        abilities: ['run away', 'adaptability', 'anticipation'],
       },
       {
         id: 3,
+        name: 'firei',
+        types: ['poison', 'grass'],
+        abilities: ['run away', 'adaptability', 'anticipation'],
       },
     ],
   },
