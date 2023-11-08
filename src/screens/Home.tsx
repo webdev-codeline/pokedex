@@ -8,29 +8,22 @@ import { styled } from 'styled-components/native';
 // components
 import { CardProps } from '@/components/Card';
 import { usePokemonSearchByNameLazyQuery } from '@/hooks';
+import { NavigationInput } from '@/types/action';
+import { toCardData } from '@/utils/convert.helper';
 import { wrapIn } from '@/utils/input.helper';
 import { HorizontalList } from '@components/HorizontalList';
 import { SearchBar } from '@components/SearchBar';
 
-export const Home = () => {
+export const Home = ({ navigation }: any) => {
   const [searchText, setSearchText] = useState<string>();
 
   // TODO use error to render error compoenet
-  const [searchPokemons, { loading, error, data }] = usePokemonSearchByNameLazyQuery();
+  const [searchPokemons, { loading, data }] = usePokemonSearchByNameLazyQuery();
 
   let mappedSearchData: CardProps[] = [];
 
   if (!loading && data) {
-    mappedSearchData = data.pokemons.map(({ id, abilities, types, name }) => {
-      // TODO validate the result via zod
-      // TODO remove the default value and throw error incase of invalid data
-      return {
-        id,
-        abilities: abilities.map(({ ability }) => ability?.name),
-        name,
-        type: types[0]?.type?.name || 'normal',
-      } as CardProps;
-    });
+    mappedSearchData = toCardData(data);
   }
 
   // TODO add debounce for this request
@@ -38,6 +31,16 @@ export const Home = () => {
     setSearchText(newInput);
 
     searchPokemons({ variables: { name: wrapIn('%')(newInput) } });
+  };
+
+  const onCardPress = ({ id, type, ancestorId }: NavigationInput) => {
+    // TODO add the id to searched list
+
+    navigation.navigate('Details', {
+      id,
+      type,
+      ancestorId,
+    });
   };
 
   return (
@@ -50,11 +53,17 @@ export const Home = () => {
             <ActivityIndicator size='large' color={'#000'} />
           </LoadingContainer>
         ) : (
-          searchText && <HorizontalList title={`Result for: "${searchText}" `} data={mappedSearchData} />
+          searchText && (
+            <HorizontalList
+              title={`Result for: "${searchText}" `}
+              data={mappedSearchData}
+              onPressCallback={onCardPress}
+            />
+          )
         )}
 
-        <HorizontalList title='Searched: ' data={[]} />
-        <HorizontalList title='Visited: ' data={[]} />
+        <HorizontalList title='Searched: ' data={[]} onPressCallback={() => {}} />
+        <HorizontalList title='Visited: ' data={[]} onPressCallback={() => {}} />
       </HomeContainer>
     </ScrollView>
   );

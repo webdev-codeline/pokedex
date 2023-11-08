@@ -5,6 +5,9 @@ import { FlatList } from 'react-native';
 // components
 import { Card, CardProps } from '@components/Card';
 
+// types
+import { NavigationInput } from '@/types/action';
+
 // styles
 import { ListContainer, ListEmpty, ListEmptyContainer, ListTitle } from './HorizontalList.styles';
 
@@ -12,24 +15,34 @@ export type HorizontalListProps = {
   data: CardProps[];
   title: string;
   emptyMessage?: string;
+  onPressCallback: (input: NavigationInput) => void;
 };
 
-export const HorizontalList: FC<HorizontalListProps> = ({ data, title, emptyMessage }) => {
+export const HorizontalList: FC<HorizontalListProps> = ({ data, title, emptyMessage, onPressCallback }) => {
   return (
     <ListContainer>
       <ListTitle>{title}</ListTitle>
 
-      {data && data[0] ? (
+      {data && data.length && data[0] ? (
         <FlatList
           horizontal
           data={data}
-          renderItem={({ item: { id, abilities, name, type }, index }) => (
-            <Card key={index} id={id} abilities={abilities} name={name} type={type} />
+          renderItem={({ item: { id, ancestorId, abilities, name, type }, index }) => (
+            <Card
+              key={index}
+              id={id}
+              abilities={abilities}
+              name={name}
+              type={type}
+              ancestorId={ancestorId}
+              onPressCallback={() => {
+                console.log({ id, type, ancestorId });
+                onPressCallback({ id, type, ancestorId });
+              }}
+            />
           )}
         />
       ) : (
-        // TODO only show this when lenght is 0
-        // FIXME in case of error or loading dont render this compoent and render a loading
         <ListEmptyContainer>
           <ListEmpty>{emptyMessage ?? 'No Data yet!'}</ListEmpty>
         </ListEmptyContainer>

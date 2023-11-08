@@ -5,9 +5,9 @@ import React, { FC } from 'react';
 import { statNameToTile } from '@utils/convert.helper';
 
 // styles
-import { StatContainer, StatPointsCircles, StatPointsWrapper, StatTitle } from './Stat.styles';
-import { colors } from '@/utils/colors.helper';
 import { DarkenPokemonTypes } from '@/types/color';
+import { colors } from '@/utils/colors.helper';
+import { StatContainer, StatPointsCircles, StatPointsWrapper, StatTitle } from './Stat.styles';
 
 export type StatProps = {
   name: string;
@@ -23,8 +23,13 @@ export const Stat: FC<StatProps> = ({ name, value, typeColor }) => {
       <StatPointsWrapper>
         {Array(6)
           .fill(0)
-          .map((c) => (
-            <StatPointsCircles key={c} value={value} index={c} typeColor={colors[typeColor]} />
+          .map((_, index) => (
+            <StatPointsCircles
+              key={index}
+              value={Math.floor(value / 16.666)}
+              index={index}
+              typeColor={colors[typeColor]}
+            />
           ))}
       </StatPointsWrapper>
     </StatContainer>

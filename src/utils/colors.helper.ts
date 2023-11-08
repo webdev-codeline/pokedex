@@ -27,7 +27,7 @@ const darkenColor = (color: string): string => {
 };
 
 export const toDarkKey = (type: PokemonTypes) =>
-  `darken${type.charAt(0).toUpperCase()}${type.slice(1)}` as DarkenPokemonTypes;
+  type ? (`darken${type.charAt(0).toUpperCase()}${type.slice(1)}` as DarkenPokemonTypes) : 'darkenNormal';
 
 const pokemonColorsWithDarken: DarkColorMap | Partial<DarkColorMap> = {};
 

@@ -33,6 +33,7 @@ const CardData: CardDataProps = {
   component: Card,
   args: {
     id: 2,
+    ancestorId: 10,
     name: 'eevee',
     type: 'grass',
     abilities: ['run away', 'adaptability', 'anticipation'],

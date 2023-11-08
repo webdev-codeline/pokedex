@@ -53,7 +53,11 @@ fragment Pokemon on pokemon_v2_pokemon {
   }
 }
 
-fragment PokemonDecendent on pokemon_v2_pokemon {
+fragment PokemonAncestor on pokemon_v2_pokemon {
   id
   name
+
+  types: pokemon_v2_pokemontypes(limit: 3) {
+    ...PokemonType
+  }
 }
