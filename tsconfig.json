@@ -3,6 +3,8 @@
   "compilerOptions": {
     "strict": true,
     "baseUrl": ".",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "paths": {
       "react": ["./node_modules/@types/react"],
 
@@ -20,5 +22,6 @@
       "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"]
     }
-  }
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
 }

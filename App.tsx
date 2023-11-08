@@ -1,11 +1,24 @@
+// react
+import React from 'react';
+import { Text } from 'react-native';
+
+// libs
+import { ApolloProvider } from '@apollo/client';
 import Constants from 'expo-constants';
-import { StyleSheet, Text, View } from 'react-native';
+
+// configs
+import client from './client';
+
+// styles
+import { SafeView } from './App.styles';
 
 function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <SafeView>
+      <ApolloProvider client={client}>
+        <Text>Hello</Text>
+      </ApolloProvider>
+    </SafeView>
   );
 }
 
@@ -15,14 +28,5 @@ let AppEntryPoint = App;
 if (Constants?.expoConfig?.extra?.storybookEnabled === 'true') {
   AppEntryPoint = require('./.storybook').default;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default AppEntryPoint;

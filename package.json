@@ -7,8 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "generate": "graphql-codegen --config codegen.js -r dotenv/config .env",
-    "generate:watch": "yarn generate --watch",
+    "generate": "graphql-codegen --config codegen.js",
+    "generate:watch": "bun run generate --watch",
     "storybook-generate": "sb-rn-get-stories",
     "storybook-watch": "sb-rn-watcher",
     "storybook": "sb-rn-get-stories && cross-env STORYBOOK_ENABLED='true' expo start",
@@ -16,10 +16,12 @@
     "storybook:android": "sb-rn-get-stories && cross-env STORYBOOK_ENABLED='true' expo start --android"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.6",
     "cross-env": "^7.0.3",
     "expo": "^48.0.0",
     "expo-constants": "~14.2.1",
     "expo-status-bar": "~1.4.4",
+    "graphql": "^16.8.1",
     "react": "18.2.0",
     "react-native": "0.71.14",
     "styled-components": "^6.1.0",
