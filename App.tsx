@@ -9,13 +9,13 @@ import Constants from 'expo-constants';
 
 // styles
 import { Details } from './src/screens/Details';
-import { IconFiles } from './src/utils/iconNames.helper';
+import { IconFiles, IconNames } from './src/utils/iconNames.helper';
 import { colors } from './src/utils/pokemonTypeColors.helper';
 
 function App() {
   return (
     <Details
-      Icon={IconFiles.BugIcon}
+      Icon={IconFiles[IconNames['grass']]}
       typeColor={colors['grass']}
       darkenTypeColor={colors['darkenGrass']}
       data={{

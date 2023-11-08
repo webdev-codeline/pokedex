@@ -1,3 +1,5 @@
+import { SvgProps } from 'react-native-svg';
+
 import BugIcon from '../assets/icons/bug.svg';
 import DarkIcon from '../assets/icons/dark.svg';
 import DragonIcon from '../assets/icons/dragon.svg';
@@ -38,7 +40,7 @@ export const IconFiles = {
   WaterIcon,
 };
 
-export const IconNames = {
+export const IconNames: { [key: string]: keyof typeof IconFiles } = {
   bug: 'BugIcon',
   dark: 'DarkIcon',
   dragon: 'DragonIcon',
