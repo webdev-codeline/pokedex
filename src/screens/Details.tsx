@@ -12,6 +12,8 @@ type TData = {
   abilities: string[];
   weight: number;
   height: number;
+  baseStatsTotal: number;
+  baseStatsText: string;
 };
 
 type TDetails = {
@@ -30,46 +32,57 @@ type TStyledComponent = {
 
 export const Details = ({ Icon, sprite, typeColor, darkenTypeColor, data }: TDetails) => {
   return (
-    <Container>
-      {/* header starts here */}
-      <Header>
-        <HeaderMainBG bgcolor={typeColor}>
-          <TypeIcon borderColor={darkenTypeColor}>
-            <Icon width={52} height={52} />
-          </TypeIcon>
-          <IdContainer bgcolor={darkenTypeColor}>
-            <IdNumber>{data.id}</IdNumber>
-          </IdContainer>
-          <TypesContainer>
-            {data.types.map((type) => (
-              <Type bgcolor={colors[`darken${type.charAt(0).toUpperCase()}${type.slice(1)}`]}>{type}</Type>
-            ))}
-          </TypesContainer>
-          <AbilitiesContainer bgcolor={darkenTypeColor}>
-            <AbilitiesTitle>Abilities</AbilitiesTitle>
-            {data.abilities.map((ability) => (
-              <Ability>{ability}</Ability>
-            ))}
-          </AbilitiesContainer>
-          <Avatar source={{ uri: sprite }} style={{ width: 350, height: 350 }} />
-          <MainDetailsContainer>
-            <Name>{data.name.toUpperCase()}</Name>
-            <Evolution>Evolution Pokémon</Evolution>
-            <PhysicalContainer>
-              <PhysicalDetails>
-                <PhysicalTitle>Height</PhysicalTitle>
-                <PhysicalValue>{data.height} m</PhysicalValue>
-              </PhysicalDetails>
-              <PhysicalDetails>
-                <PhysicalTitle>Weight</PhysicalTitle>
-                <PhysicalValue>{data.weight} kg</PhysicalValue>
-              </PhysicalDetails>
-            </PhysicalContainer>
-          </MainDetailsContainer>
-        </HeaderMainBG>
-      </Header>
-      {/* header ends here */}
-    </Container>
+    <ScrollView>
+      <Container>
+        {/* header starts here */}
+        <Header>
+          <HeaderMainBG bgcolor={typeColor}>
+            <TypeIcon borderColor={darkenTypeColor}>
+              <Icon width={52} height={52} />
+            </TypeIcon>
+            <IdContainer bgcolor={darkenTypeColor}>
+              <IdNumber>{data.id}</IdNumber>
+            </IdContainer>
+            <TypesContainer>
+              {data.types.map((type, index) => (
+                <Type key={index} bgcolor={colors[`darken${type.charAt(0).toUpperCase()}${type.slice(1)}`]}>
+                  {type}
+                </Type>
+              ))}
+            </TypesContainer>
+            <AbilitiesContainer bgcolor={darkenTypeColor}>
+              <AbilitiesTitle>Abilities</AbilitiesTitle>
+              {data.abilities.map((ability, index) => (
+                <Ability key={index}>{ability}</Ability>
+              ))}
+            </AbilitiesContainer>
+            <Avatar source={{ uri: sprite }} style={{ width: 350, height: 350 }} />
+            <MainDetailsContainer>
+              <Name>{data.name.toUpperCase()}</Name>
+              <Evolution>Evolution Pokémon</Evolution>
+              <PhysicalContainer>
+                <PhysicalDetails>
+                  <PhysicalTitle>Height</PhysicalTitle>
+                  <PhysicalValue>{data.height} m</PhysicalValue>
+                </PhysicalDetails>
+                <PhysicalDetails>
+                  <PhysicalTitle>Weight</PhysicalTitle>
+                  <PhysicalValue>{data.weight} kg</PhysicalValue>
+                </PhysicalDetails>
+              </PhysicalContainer>
+            </MainDetailsContainer>
+          </HeaderMainBG>
+        </Header>
+        {/* header ends here */}
+        <BaseContainer>
+          <BaseTitleWrapper>
+            <BaseTitle>Base stats total</BaseTitle>
+            <BasePoint color={darkenTypeColor}>{data.baseStatsTotal}</BasePoint>
+          </BaseTitleWrapper>
+          <BaseText bgcolor={typeColor}>{data.baseStatsText}</BaseText>
+        </BaseContainer>
+      </Container>
+    </ScrollView>
   );
 };
 
@@ -87,6 +100,7 @@ const Header = styled.View`
   justify-content: center;
   align-items: center;
   width: 95%;
+  margin-bottom: 100px;
 `;
 
 const HeaderMainBG = styled.View<TStyledComponent>`
@@ -229,4 +243,41 @@ const PhysicalTitle = styled.Text`
 const PhysicalValue = styled.Text`
   color: #1f1f1f;
   font-size: 10px;
+`;
+
+const BaseContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  height: 200px;
+`;
+
+const BaseTitleWrapper = styled.View`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 200px;
+`;
+
+const BaseTitle = styled.Text`
+  color: #1f1f1f;
+  font-size: 10px;
+`;
+
+const BasePoint = styled.Text<TStyledComponent>`
+  color: ${(props) => props.color ?? '#000'};
+  font-size: 32px;
+`;
+
+const BaseText = styled.Text<TStyledComponent>`
+  font-size: 12px;
+  color: #fff;
+  width: 65%;
+  padding: 24px 16px;
+  border-radius: 24px;
+  background-color: ${(props) => props.bgcolor ?? '#313131'};
 `;

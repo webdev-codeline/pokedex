@@ -31,6 +31,9 @@ function App() {
         abilities: ['run away', 'adaptability', 'anticipation'],
         height: 0.3,
         weight: 0.5,
+        baseStatsTotal: 325,
+        baseStatsText:
+          'Its genetic code is irregular. It may mutate if it is exposed to radiation from element STONEs.',
       }}
     />
   );
