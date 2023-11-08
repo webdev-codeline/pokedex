@@ -1,5 +1,3 @@
-import { SvgProps } from 'react-native-svg';
-
 import BugIcon from '../assets/icons/bug.svg';
 import DarkIcon from '../assets/icons/dark.svg';
 import DragonIcon from '../assets/icons/dragon.svg';
