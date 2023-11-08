@@ -22,7 +22,7 @@ export const Stat = ({ name, value, typeColor }: TStat) => {
       </StatTitle>
       <StatPointsWrapper>
         {circleCount.map((c) => (
-          <StatPointsCircles value={value} index={c} typeColor={typeColor} />
+          <StatPointsCircles key={c} value={value} index={c} typeColor={typeColor} />
         ))}
       </StatPointsWrapper>
     </StatContainer>
