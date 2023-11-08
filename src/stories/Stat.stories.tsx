@@ -4,21 +4,30 @@ import { View } from 'react-native';
 
 // components
 import { Stat, StatProps } from '@components/Stat';
+import { DarkenPokemonTypes } from '@/types/color';
 
-// utils
-import { colors } from '@utils/colors.helper';
+type ArgsType = {
+  options: DarkenPokemonTypes[];
+  control: {
+    label: string;
+    type: string;
+  };
+};
 
 type StatDataProps = {
   title: string;
   component: FC<StatProps>;
   args: Args;
   decorators: Array<(Story: FC) => JSX.Element>;
+  argTypes: {
+    typeColor: ArgsType;
+  };
 };
 
 type Args = {
   name: string;
   value: number;
-  typeColor: string;
+  typeColor: DarkenPokemonTypes;
 };
 
 const StatData: StatDataProps = {
@@ -27,8 +36,22 @@ const StatData: StatDataProps = {
   args: {
     name: 'hp',
     value: 1,
-    // TODO make this a drop down list similar to types
-    typeColor: colors['darkenGrass'],
+    typeColor: 'darkenGrass',
+  },
+  argTypes: {
+    typeColor: {
+      // todo change this array
+      options: [
+        'darkenBug',
+        'darkenDark',
+        'darkenDragon',
+        'darkenElectric',
+        'darkenFairy',
+        'darkenFighting',
+        'darkenFire',
+      ],
+      control: { label: 'firstType', type: 'select' },
+    },
   },
   decorators: [
     (Story: FC) => (

@@ -4,7 +4,7 @@ import { ActivityIndicator, ScrollView } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 import { styled } from 'styled-components/native';
 import { EvolutionIcon } from '@components/EvolutionIcon';
-import { PokemonTypes } from '@/types/color';
+import { DarkenPokemonTypes, PokemonTypes } from '@/types/color';
 import { Stat } from '@components/Stat';
 import { colors, toDarkKey } from '@utils/colors.helper';
 
@@ -115,7 +115,14 @@ export const Details = ({ Icon, typeColor, darkenTypeColor, data }: TDetails) =>
 
           <StatsContainer>
             {data.stats.map((stat, index) => (
-              <Stat key={index} value={stat.value} name={stat.name} typeColor={darkenTypeColor} />
+              <Stat
+                key={index}
+                value={stat.value}
+                name={stat.name}
+                typeColor={
+                  `darken${data.types[0]!.charAt(0).toUpperCase()}${data.types[0]!.slice(1)}` as DarkenPokemonTypes
+                }
+              />
             ))}
           </StatsContainer>
 
