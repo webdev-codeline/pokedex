@@ -1,45 +1,50 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { SvgProps } from 'react-native-svg';
+import { colors } from '../utils/pokemonTypeColors.helper';
+import { IconFiles, IconNames } from 'src/utils/iconNames.helper';
 
 type TText = {
   color: string;
 };
 
-type TTypes = {
-  textColor: string;
-  name: string;
-};
-
 export type TCard = {
-  name: string;
-  spriteUrl: string;
-  spriteBack: string;
-  Icon: React.FC<SvgProps>;
-  types: TTypes[];
-  details: string[];
+  id: number;
 };
 
-export const Card = ({ name, details, spriteUrl, spriteBack, Icon, types }: TCard) => {
+export const Card = ({ id }: TCard) => {
+  // todo change this to api call or zustand|redux call
+  const data = {
+    id,
+    name: 'eevee',
+    types: ['grass', 'poison'],
+    abilities: ['run away', 'adaptability', 'anticipation'],
+  };
+
+  const Icon: React.FC<SvgProps> = IconFiles[IconNames[data.types[0]]];
+
   return (
     <CardContainer>
-      <SpritesBack source={{ uri: spriteBack }}>
-        <Sprite source={{ uri: spriteUrl }} style={{ width: 200, height: 200 }} />
+      <SpritesBack source={{ uri: `https://kai-tw.github.io/PokeCard/backgrounds/${data.types[0]}.png` }}>
+        <Sprite
+          source={{ uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png` }}
+          style={{ width: 200, height: 200 }}
+        />
       </SpritesBack>
       <CardData>
         <CardIcon>
           <Icon width={40} height={40} />
         </CardIcon>
         <TypesWrapper>
-          {types.map((t, index) => (
-            <Type color={t.textColor} key={index}>
-              {t.name}
+          {data.types.map((t, index) => (
+            <Type color={colors[t]} key={index}>
+              {t}
             </Type>
           ))}
         </TypesWrapper>
-        <CardName>{name}</CardName>
-        {details.map((d, index) => (
-          <CardDetail key={index}>{d}</CardDetail>
+        <CardName>{data.name}</CardName>
+        {data.abilities.map((a, index) => (
+          <Abilities key={index}>{a}</Abilities>
         ))}
       </CardData>
     </CardContainer>
@@ -116,7 +121,7 @@ const CardName = styled.Text`
   color: #303030;
 `;
 
-const CardDetail = styled.Text`
+const Abilities = styled.Text`
   margin-top: 12px;
   text-align: right;
   font-size: 16px;
