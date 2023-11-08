@@ -1,16 +1,22 @@
+// react
 import React from 'react';
+
+// libs
 import styled from 'styled-components/native';
 
-type TEvolutionIcon = {
+// helpers
+import { idToSpriteUri } from '@utils/icons.helper';
+
+type EvolutionIconProps = {
   pokemonId: number;
 };
 
-export const EvolutionIcon = ({ pokemonId }: TEvolutionIcon) => {
+export const EvolutionIcon = ({ pokemonId }: EvolutionIconProps) => {
   return (
     <IconWrapper>
       <IconContent
         source={{
-          uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId + '.png'}`,
+          uri: idToSpriteUri(pokemonId),
         }}
         style={{
           width: 62,

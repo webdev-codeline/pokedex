@@ -1,20 +1,28 @@
-import { HorizontalList } from '../components/HorizontalList';
+// react
 import React, { useState } from 'react';
-import { styled } from 'styled-components/native';
-import { SearchBar } from '../components/SearchBar';
 import { ScrollView } from 'react-native';
+
+// libs
+import { styled } from 'styled-components/native';
+
+// components
+import { HorizontalList } from '@components/HorizontalList';
+import { SearchBar } from '@components/SearchBar';
 
 export const Home = () => {
   const [searchText, setSearchText] = useState<string>();
+
   return (
     <ScrollView>
       <HomeContainer>
         <SearchBar searchText={searchText} setSearchText={setSearchText} />
         {/* todo add data lists here: */}
-        {!searchText && <HorizontalList title='Discover New' />}
-        <HorizontalList title='Visited Lately' />
-        <HorizontalList title='Fav' />
-        {searchText && <HorizontalList title='Discover New' />}
+        {/* TODO add loading here add data lists here: */}
+
+        {!searchText && <HorizontalList title='Searched Before' data={[]} />}
+        <HorizontalList title='Visited Lately' data={[]} />
+        <HorizontalList title='Fav' data={[]} />
+        {searchText && <HorizontalList title='Visited' data={[]} />}
       </HomeContainer>
     </ScrollView>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Stat } from '../components/Stat';
-import { colors } from '../utils/pokemonTypeColors.helper';
+import { colors } from '../utils/colors.helper';
 
 type TStatDataProps = {
   title: string;

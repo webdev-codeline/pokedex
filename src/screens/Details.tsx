@@ -1,11 +1,12 @@
 import React from 'react';
 
+import { PokemonTypes } from '@/types/color';
 import { ScrollView } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 import { styled } from 'styled-components/native';
 import { EvolutionIcon } from '../components/EvolutionIcon';
 import { Stat } from '../components/Stat';
-import { PokemonTypes, colors, toDarkKey } from '../utils/pokemonTypeColors.helper';
+import { colors, toDarkKey } from '../utils/colors.helper';
 
 type TStat = {
   name: string;

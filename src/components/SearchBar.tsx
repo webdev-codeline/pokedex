@@ -1,12 +1,15 @@
+// react
 import React from 'react';
+
+// libs
 import styled from 'styled-components/native';
 
-type TSearch = {
+type SearchBarProps = {
   searchText?: string;
   setSearchText: (newSearchText: string) => void;
 };
 
-export const SearchBar = ({ searchText, setSearchText }: TSearch) => {
+export const SearchBar = ({ searchText, setSearchText }: SearchBarProps) => {
   return (
     <SearchBarContainer>
       <SearchInput

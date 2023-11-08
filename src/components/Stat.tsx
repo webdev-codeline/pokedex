@@ -1,24 +1,23 @@
+// react
 import React from 'react';
-import styled from 'styled-components/native';
 
-export type TStat = {
+// helpers
+import { statNameToTile } from '@utils/convert.helper';
+
+// styles
+import { StatContainer, StatPointsCircles, StatPointsWrapper, StatTitle } from './Stat.styles';
+
+export type StatProps = {
   name: string;
   value: number;
   typeColor: string;
 };
 
-type TCircles = {
-  value: number;
-  index: number;
-  typeColor: string;
-};
-
-export const Stat = ({ name, value, typeColor }: TStat) => {
+export const Stat = ({ name, value, typeColor }: StatProps) => {
   return (
     <StatContainer>
-      <StatTitle>
-        {name === 'hp' ? name.toUpperCase() : name.charAt(0).toUpperCase() + name.slice(1).replace('-', ' ')}
-      </StatTitle>
+      <StatTitle>{statNameToTile(name)}</StatTitle>
+
       <StatPointsWrapper>
         {Array(6)
           .fill(0)
@@ -29,34 +28,3 @@ export const Stat = ({ name, value, typeColor }: TStat) => {
     </StatContainer>
   );
 };
-
-const StatContainer = styled.View`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  margin: 20px 5px;
-`;
-
-const StatTitle = styled.Text`
-  font-size: 20px;
-  font-weight: 600;
-  color: #222222;
-  padding-left: 12px;
-`;
-
-const StatPointsWrapper = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-`;
-
-const StatPointsCircles = styled.View<TCircles>`
-  width: 18px;
-  height: 18px;
-  border-radius: 200px;
-  background-color: ${(props) => (props.value >= props.index ? props.typeColor : '#a5a5a5')};
-  margin: 0 3px;
-`;

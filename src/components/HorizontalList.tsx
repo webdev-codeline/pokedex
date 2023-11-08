@@ -1,21 +1,35 @@
+// react
 import React from 'react';
 import { FlatList } from 'react-native';
-import styled from 'styled-components/native';
-import { Card, TCard } from './Card';
 
-type TList = {
-  data?: TCard[];
+// components
+import { Card, CardProps } from '@components/Card';
+
+// styles
+import { ListContainer, ListEmpty, ListEmptyContainer, ListTitle } from './HorizontalList.styles';
+
+type HorizontalListProps = {
+  data: CardProps[];
   title: string;
   emptyMessage?: string;
 };
 
-export const HorizontalList = ({ data, title, emptyMessage }: TList) => {
+export const HorizontalList = ({ data, title, emptyMessage }: HorizontalListProps) => {
   return (
     <ListContainer>
       <ListTitle>{title}</ListTitle>
+
       {data && data[0] ? (
-        <FlatList horizontal data={data} renderItem={({ item, index }) => <Card key={index} id={item.id} />} />
+        <FlatList
+          horizontal
+          data={data}
+          renderItem={({ item: { id, abilities, name, types }, index }) => (
+            <Card key={index} id={id} abilities={abilities} name={name} types={types} />
+          )}
+        />
       ) : (
+        // TODO only show this when lenght is 0
+        // FIXME in case of error or loading dont render this compoent and render a loading
         <ListEmptyContainer>
           <ListEmpty>{emptyMessage ?? 'No Data yet!'}</ListEmpty>
         </ListEmptyContainer>
@@ -23,35 +37,3 @@ export const HorizontalList = ({ data, title, emptyMessage }: TList) => {
     </ListContainer>
   );
 };
-
-const ListContainer = styled.View`
-  display: flex;
-  flex-direction: column;
-  margin: 24px 0;
-  padding: 14px 0px 14px 10px;
-  height: 340px;
-  width: 100%;
-  background: #e4e4e4;
-  color: #333;
-`;
-
-const ListTitle = styled.Text`
-  margin-left: 16px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-`;
-
-const ListEmptyContainer = styled.View`
-  width: 100%;
-  height: 270px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ListEmpty = styled.Text`
-  font-size: 16px;
-  color: #333;
-`;

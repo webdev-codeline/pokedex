@@ -1,3 +1,5 @@
+import { PokemonTypes } from '@/types/color';
+
 import BugIcon from '../assets/icons/bug.svg';
 import DarkIcon from '../assets/icons/dark.svg';
 import DragonIcon from '../assets/icons/dragon.svg';
@@ -16,8 +18,6 @@ import PsychicIcon from '../assets/icons/psychic.svg';
 import RockIcon from '../assets/icons/rock.svg';
 import SteelIcon from '../assets/icons/steel.svg';
 import WaterIcon from '../assets/icons/water.svg';
-
-import { PokemonTypes } from './pokemonTypeColors.helper';
 
 export const IconFiles = {
   BugIcon,
@@ -60,3 +60,8 @@ export const IconNames: { [K in PokemonTypes]: keyof typeof IconFiles } = {
   steel: 'SteelIcon',
   fairy: 'FairyIcon',
 };
+
+export const typeToBackgroundUri = (type: PokemonTypes) => `https://kai-tw.github.io/PokeCard/backgrounds/${type}.png`;
+
+export const idToSpriteUri = (id: number) =>
+  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
