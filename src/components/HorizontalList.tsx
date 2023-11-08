@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, { FC } from 'react';
 import { FlatList } from 'react-native';
 
 // components
@@ -8,13 +8,13 @@ import { Card, CardProps } from '@components/Card';
 // styles
 import { ListContainer, ListEmpty, ListEmptyContainer, ListTitle } from './HorizontalList.styles';
 
-type HorizontalListProps = {
+export type HorizontalListProps = {
   data: CardProps[];
   title: string;
   emptyMessage?: string;
 };
 
-export const HorizontalList = ({ data, title, emptyMessage }: HorizontalListProps) => {
+export const HorizontalList: FC<HorizontalListProps> = ({ data, title, emptyMessage }) => {
   return (
     <ListContainer>
       <ListTitle>{title}</ListTitle>

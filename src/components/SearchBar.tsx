@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, { FC } from 'react';
 
 // libs
 import styled from 'styled-components/native';
@@ -9,7 +9,7 @@ type SearchBarProps = {
   setSearchText: (newSearchText: string) => void;
 };
 
-export const SearchBar = ({ searchText, setSearchText }: SearchBarProps) => {
+export const SearchBar: FC<SearchBarProps> = ({ searchText, setSearchText }) => {
   return (
     <SearchBarContainer>
       <SearchInput

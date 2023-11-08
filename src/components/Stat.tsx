@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, { FC } from 'react';
 
 // helpers
 import { statNameToTile } from '@utils/convert.helper';
@@ -13,7 +13,7 @@ export type StatProps = {
   typeColor: string;
 };
 
-export const Stat = ({ name, value, typeColor }: StatProps) => {
+export const Stat: FC<StatProps> = ({ name, value, typeColor }) => {
   return (
     <StatContainer>
       <StatTitle>{statNameToTile(name)}</StatTitle>

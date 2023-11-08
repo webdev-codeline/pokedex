@@ -1,26 +1,29 @@
-import React from 'react';
+// react
+import React, { FC } from 'react';
 import { View } from 'react-native';
-import { EvolutionIcon } from '@components/EvolutionIcon';
 
-type TIconDataProps = {
+// components
+import { EvolutionIcon, EvolutionIconProps } from '@components/EvolutionIcon';
+
+type IconDataProps = {
   title: string;
-  component: React.FC<any>;
-  args: TArgs;
-  decorators: ((Story: React.FC<{}>) => JSX.Element)[];
+  component: FC<EvolutionIconProps>;
+  args: Args;
+  decorators: ((Story: FC<{}>) => JSX.Element)[];
 };
 
-type TArgs = {
+type Args = {
   pokemonId: number;
 };
 
-const IconData: TIconDataProps = {
+const IconData: IconDataProps = {
   title: 'IconData',
   component: EvolutionIcon,
   args: {
     pokemonId: 2,
   },
   decorators: [
-    (Story: React.FC) => (
+    (Story: FC) => (
       <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
         <Story />
       </View>

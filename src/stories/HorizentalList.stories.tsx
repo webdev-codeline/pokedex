@@ -1,22 +1,25 @@
-import { HorizontalList } from '@components/HorizontalList';
-import React from 'react';
+// react
+import React, { FC } from 'react';
 import { View } from 'react-native';
-import { CardProps } from '@components/Card';
 
-type TListDataProps = {
+// components
+import { CardProps } from '@components/Card';
+import { HorizontalList, HorizontalListProps } from '@components/HorizontalList';
+
+type ListDataProps = {
   title: string;
-  component: React.FC<any>;
-  args: TArgs;
-  decorators: ((Story: React.FC<{}>) => JSX.Element)[];
+  component: FC<HorizontalListProps>;
+  args: Args;
+  decorators: ((Story: FC<{}>) => JSX.Element)[];
 };
 
-type TArgs = {
+type Args = {
   title: string;
   emptyMessage: string;
   data: CardProps[];
 };
 
-const ListData: TListDataProps = {
+const ListData: ListDataProps = {
   title: 'ListData',
   component: HorizontalList,
   args: {
@@ -38,7 +41,7 @@ const ListData: TListDataProps = {
     ],
   },
   decorators: [
-    (Story: React.FC<any>) => (
+    (Story: FC<{}>) => (
       <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
         <Story />
       </View>

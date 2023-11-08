@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, { FC } from 'react';
 
 // libs
 import { SvgProps } from 'react-native-svg';
@@ -40,7 +40,7 @@ export const cardDefaultValues = {
   abilities: ['run away', 'adaptability', 'anticipation'],
 };
 
-export const Card = (props: CardProps) => {
+export const Card: FC<CardProps> = (props: CardProps) => {
   // export const Card = ({ id, name, types, abilities }: CardProps) => {
   // todo remove initial data, this is for test
   const { id, name, type, abilities } = props || cardDefaultValues;

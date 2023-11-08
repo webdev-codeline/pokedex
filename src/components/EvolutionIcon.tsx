@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, { FC } from 'react';
 
 // libs
 import styled from 'styled-components/native';
@@ -7,11 +7,11 @@ import styled from 'styled-components/native';
 // helpers
 import { idToSpriteUri } from '@utils/icons.helper';
 
-type EvolutionIconProps = {
+export type EvolutionIconProps = {
   pokemonId: number;
 };
 
-export const EvolutionIcon = ({ pokemonId }: EvolutionIconProps) => {
+export const EvolutionIcon: FC<EvolutionIconProps> = ({ pokemonId }) => {
   return (
     <IconWrapper>
       <IconContent

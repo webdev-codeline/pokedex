@@ -1,16 +1,14 @@
+// react
 import React from 'react';
 import { View } from 'react-native';
-import { Card } from '@components/Card';
-import { PokemonTypes } from '@/types/color';
 
-type TArgs = {
-  id: number;
-  name: string;
-  type: PokemonTypes;
-  abilities: string[];
-};
+// components
+import { Card, CardProps } from '@components/Card';
 
-type TArgsType = {
+// types
+import { PokemonTypes, pokemonColors } from '@/types/color';
+
+type ArgsType = {
   options: PokemonTypes[];
   control: {
     label: string;
@@ -18,17 +16,19 @@ type TArgsType = {
   };
 };
 
-type TCardDataProps = {
+type CardDataProps = {
   title: string;
-  component: React.FC<any>;
-  args: TArgs;
+  component: React.FC<CardProps>;
+  args: CardProps;
   decorators: ((Story: React.FC<{}>) => JSX.Element)[];
   argTypes: {
-    type: TArgsType;
+    type: ArgsType;
   };
 };
 
-const CardData: TCardDataProps = {
+const typeOptions = Object.keys(pokemonColors) as PokemonTypes[];
+
+const CardData: CardDataProps = {
   title: 'CardData',
   component: Card,
   args: {
@@ -39,26 +39,7 @@ const CardData: TCardDataProps = {
   },
   argTypes: {
     type: {
-      options: [
-        'grass',
-        'normal',
-        'fire',
-        'water',
-        'electric',
-        'ice',
-        'fighting',
-        'poison',
-        'ground',
-        'flying',
-        'psychic',
-        'bug',
-        'rock',
-        'ghost',
-        'dragon',
-        'dark',
-        'steel',
-        'fairy',
-      ],
+      options: typeOptions,
       control: { label: 'firstType', type: 'select' },
     },
   },

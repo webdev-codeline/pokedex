@@ -1,31 +1,37 @@
-import React from 'react';
+// react
+import React, { FC } from 'react';
 import { View } from 'react-native';
-import { Stat } from '@components/Stat';
+
+// components
+import { Stat, StatProps } from '@components/Stat';
+
+// utils
 import { colors } from '@utils/colors.helper';
 
-type TStatDataProps = {
+type StatDataProps = {
   title: string;
-  component: React.FC<any>;
-  args: TArgs;
-  decorators: Array<(Story: React.FC) => JSX.Element>;
+  component: FC<StatProps>;
+  args: Args;
+  decorators: Array<(Story: FC) => JSX.Element>;
 };
 
-type TArgs = {
+type Args = {
   name: string;
   value: number;
   typeColor: string;
 };
 
-const StatData: TStatDataProps = {
+const StatData: StatDataProps = {
   title: 'StatData',
   component: Stat,
   args: {
     name: 'hp',
     value: 1,
+    // TODO make this a drop down list similar to types
     typeColor: colors['darkenGrass'],
   },
   decorators: [
-    (Story: React.FC) => (
+    (Story: FC) => (
       <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
         <Story />
       </View>

@@ -1,10 +1,13 @@
-import { Error, ErrorProps } from '@/components/Error';
+// react
 import React from 'react';
 import { View } from 'react-native';
 
+// components
+import { Error, ErrorProps } from '@/components/Error';
+
 type TErrorDataProps = {
   title: string;
-  component: React.FC<any>;
+  component: React.FC<ErrorProps>;
   args: ErrorProps;
   decorators: ((Story: React.FC<{}>) => JSX.Element)[];
 };
