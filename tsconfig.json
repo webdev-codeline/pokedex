@@ -23,5 +23,5 @@
       // "@utils/*": ["src/utils/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "src/utils/pokemonTypeColors.js"]
 }
