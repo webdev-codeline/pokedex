@@ -27,7 +27,7 @@ import {
 export type CardProps = {
   id: number;
   name: string;
-  types: PokemonTypes[];
+  type: PokemonTypes;
   abilities: string[];
 };
 
@@ -35,15 +35,15 @@ export type CardProps = {
 export const cardDefaultValues = {
   id: 1,
   name: 'eevee',
-  types: ['grass', 'poison'] as PokemonTypes[],
+  type: 'grass' as PokemonTypes,
   abilities: ['run away', 'adaptability', 'anticipation'],
 };
 
 export const Card = (props: CardProps) => {
   // export const Card = ({ id, name, types, abilities }: CardProps) => {
   // todo remove initial data, this is for test
-  const { id, name, types, abilities } = props || cardDefaultValues;
-  const [type] = types;
+  const { id, name, type, abilities } = props || cardDefaultValues;
+
   const Icon: React.FC<SvgProps> = IconFiles[IconNames[type!]];
 
   return (
@@ -57,11 +57,7 @@ export const Card = (props: CardProps) => {
           <Icon width={40} height={40} />
         </CardIcon>
         <TypesWrapper>
-          {types.map((t, index) => (
-            <TypeText key={index} color={colors[t]}>
-              {t}
-            </TypeText>
-          ))}
+          <TypeText color={colors[type!]}>{type}</TypeText>
         </TypesWrapper>
 
         <CardName>{name.toUpperCase()}</CardName>

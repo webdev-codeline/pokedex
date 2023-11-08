@@ -26,13 +26,13 @@ const ListData: TListDataProps = {
       {
         id: 2,
         name: 'eevee',
-        types: ['grass', 'poison'],
+        type: 'grass',
         abilities: ['run away', 'adaptability', 'anticipation'],
       },
       {
         id: 3,
         name: 'firei',
-        types: ['poison', 'grass'],
+        type: 'poison',
         abilities: ['run away', 'adaptability', 'anticipation'],
       },
     ],
