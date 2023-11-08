@@ -2,11 +2,18 @@ import React from 'react';
 
 import { ScrollView } from 'react-native';
 import { SvgProps } from 'react-native-svg';
+import { Stat } from '../components/Stat';
 import { styled } from 'styled-components/native';
 import { colors } from '../utils/pokemonTypeColors.helper';
+import { EvolutionIcon } from '../components/EvolutionIcon';
+
+type TStat = {
+  name: string;
+  value: number;
+};
 
 type TData = {
-  id: number | string;
+  id: number;
   name: string;
   types: string[];
   abilities: string[];
@@ -14,11 +21,12 @@ type TData = {
   height: number;
   baseStatsTotal: number;
   baseStatsText: string;
+  stats: TStat[];
+  evolutionIds: number[];
 };
 
 type TDetails = {
   Icon: React.FC<SvgProps>;
-  sprite: string;
   typeColor: string;
   darkenTypeColor: string;
   data: TData;
@@ -30,7 +38,7 @@ type TStyledComponent = {
   borderColor?: string;
 };
 
-export const Details = ({ Icon, sprite, typeColor, darkenTypeColor, data }: TDetails) => {
+export const Details = ({ Icon, typeColor, darkenTypeColor, data }: TDetails) => {
   return (
     <ScrollView>
       <Container>
@@ -40,9 +48,11 @@ export const Details = ({ Icon, sprite, typeColor, darkenTypeColor, data }: TDet
             <TypeIcon borderColor={darkenTypeColor}>
               <Icon width={52} height={52} />
             </TypeIcon>
+
             <IdContainer bgcolor={darkenTypeColor}>
               <IdNumber>{data.id}</IdNumber>
             </IdContainer>
+
             <TypesContainer>
               {data.types.map((type, index) => (
                 <Type key={index} bgcolor={colors[`darken${type.charAt(0).toUpperCase()}${type.slice(1)}`]}>
@@ -50,13 +60,21 @@ export const Details = ({ Icon, sprite, typeColor, darkenTypeColor, data }: TDet
                 </Type>
               ))}
             </TypesContainer>
+
             <AbilitiesContainer bgcolor={darkenTypeColor}>
               <AbilitiesTitle>Abilities</AbilitiesTitle>
               {data.abilities.map((ability, index) => (
                 <Ability key={index}>{ability}</Ability>
               ))}
             </AbilitiesContainer>
-            <Avatar source={{ uri: sprite }} style={{ width: 350, height: 350 }} />
+
+            <Avatar
+              source={{
+                uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id + '.png'}`,
+              }}
+              style={{ width: 350, height: 350 }}
+            />
+
             <MainDetailsContainer>
               <Name>{data.name.toUpperCase()}</Name>
               <Evolution>Evolution Pokémon</Evolution>
@@ -74,6 +92,7 @@ export const Details = ({ Icon, sprite, typeColor, darkenTypeColor, data }: TDet
           </HeaderMainBG>
         </Header>
         {/* header ends here */}
+
         <BaseContainer>
           <BaseTitleWrapper>
             <BaseTitle>Base stats total</BaseTitle>
@@ -81,6 +100,24 @@ export const Details = ({ Icon, sprite, typeColor, darkenTypeColor, data }: TDet
           </BaseTitleWrapper>
           <BaseText bgcolor={typeColor}>{data.baseStatsText}</BaseText>
         </BaseContainer>
+
+        <StatsContainer>
+          {data.stats.map((stat, index) => (
+            <Stat key={index} value={stat.value} name={stat.name} typeColor={darkenTypeColor} />
+          ))}
+        </StatsContainer>
+
+        <EvolutionContainer bgcolor={typeColor}>
+          <EvolutionTitle>Evolutions</EvolutionTitle>
+          <EvolutionHeadIcon>
+            <EvolutionIcon pokemonId={data.id} />
+          </EvolutionHeadIcon>
+          <EvolutionTreeIcons>
+            {data.evolutionIds.map((id, index) => (
+              <EvolutionIcon pokemonId={id} key={index} />
+            ))}
+          </EvolutionTreeIcons>
+        </EvolutionContainer>
       </Container>
     </ScrollView>
   );
@@ -210,8 +247,9 @@ const MainDetailsContainer = styled.View`
 
 const Name = styled.Text`
   color: #fff;
-  font-size: 22px;
+  font-size: 24px;
   margin-bottom: 20px;
+  font-weight: 700;
 `;
 
 const Evolution = styled.Text`
@@ -281,4 +319,60 @@ const BaseText = styled.Text<TStyledComponent>`
   padding: 24px 16px;
   border-radius: 24px;
   background-color: ${(props) => props.bgcolor ?? '#313131'};
+`;
+
+const StatsContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 95%;
+`;
+
+const EvolutionContainer = styled.View<TStyledComponent>`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 95%;
+  height: 150px;
+  padding: 16px;
+  margin-bottom: 200px;
+  border-radius: 40px;
+  background-color: ${(props) => props.bgcolor ?? '#000'};
+`;
+
+const EvolutionTitle = styled.Text`
+  margin-bottom: 32px;
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+`;
+
+const EvolutionHeadIcon = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  bottom: -50px;
+  left: 30px;
+  width: 20%;
+  height: 100px;
+`;
+
+const EvolutionTreeIcons = styled.View`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  position: absolute;
+  bottom: -150px;
+  right: -30px;
+  width: 75%;
+  height: 200px;
 `;

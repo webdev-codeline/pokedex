@@ -17,7 +17,6 @@ function App() {
     <Details
       Icon={IconFiles.BugIcon}
       typeColor={colors['grass']}
-      sprite={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${'1'}.png`}
       darkenTypeColor={colors['darkenGrass']}
       data={{
         id: 333,
@@ -29,6 +28,15 @@ function App() {
         baseStatsTotal: 325,
         baseStatsText:
           'Its genetic code is irregular. It may mutate if it is exposed to radiation from element STONEs.',
+        stats: [
+          { name: 'hp', value: 4 },
+          { name: 'attack', value: 1 },
+          { name: 'defense', value: 6 },
+          { name: 'special-attack', value: 2 },
+          { name: 'special-defense', value: 3 },
+          { name: 'speed', value: 5 },
+        ],
+        evolutionIds: [2, 4, 6, 8, 10, 12],
       }}
     />
   );
