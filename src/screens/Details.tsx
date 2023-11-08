@@ -53,8 +53,6 @@ import {
 export const Details = ({ route, navigation }: any) => {
   const { id, ancestorId, type }: NavigationInput = route.params;
 
-  console.log('type in param ->', type);
-
   const { loading: ancestorLoading, data: ancestorData } = usePokemonAncestorFindByIdQuery({
     skip: !ancestorId,
     variables: { id: ancestorId ?? 1 },
@@ -74,13 +72,11 @@ export const Details = ({ route, navigation }: any) => {
     // TODO add the id to visited list
   }, []);
 
-  const onAncestorPress = ({ id, type, ancestorId }: NavigationInput) => {
-    // TODO add the id to searched list
-
-    navigation.navigate('Details', {
+  const onAncestorPress = ({ id, type }: NavigationInput) => {
+    navigation.push('Details', {
       id,
       type,
-      ancestorId,
+      ancestorId: null,
     });
   };
 
@@ -139,7 +135,7 @@ export const Details = ({ route, navigation }: any) => {
                   style={{ width: 350, height: 350 }}
                 />
 
-                <MainDetailsContainer>
+                <MainDetailsContainer ancestorId={ancestorId ?? null}>
                   <Name>{mappedData.name.toUpperCase()}</Name>
                   {ancestorId && <Evolution>Evolution Pokémon</Evolution>}
 
@@ -176,7 +172,7 @@ export const Details = ({ route, navigation }: any) => {
               onPress={() => onAncestorPress({ id: ancestorData?.pokemon[0]?.id ?? 1, type: pokemonAncestorType })}
               bgcolor={colors[toDarkKey(pokemonAncestorType)]}
             >
-              <EvolutionTitle>Evolutions</EvolutionTitle>
+              <EvolutionTitle>Evolutions (Click For More Info)</EvolutionTitle>
 
               {/* pokemon itself icon */}
               <EvolutionHeadIcon>

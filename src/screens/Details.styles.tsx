@@ -75,8 +75,8 @@ export const TypesContainer = styled.View`
   align-items: center;
   position: absolute;
   max-width: 200px;
-  top: 20px;
-  left: 20px;
+  top: 10px;
+  left: -40px;
 `;
 
 export const Type = styled.Text<StyleInput>`
@@ -119,16 +119,16 @@ export const Ability = styled.Text`
 export const Avatar = styled.Image`
   position: absolute;
   bottom: -70px;
-  left: -30px;
+  left: 10px;
 `;
 
-export const MainDetailsContainer = styled.View`
+export const MainDetailsContainer = styled.View<{ ancestorId: number | null }>`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   position: absolute;
-  bottom: -110px;
+  bottom: ${({ ancestorId }) => (ancestorId === null ? '-110px' : '-140px')};
   left: 150px;
 `;
 

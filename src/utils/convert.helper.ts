@@ -9,13 +9,17 @@ export const statNameToTile = (name: string) =>
   name === 'hp' ? name.toUpperCase() : capitalizeFirstLetter(name).replace('-', ' ');
 
 export const toCardData = (data: PokemonSearchByNameQuery) =>
-  data.pokemons.map(({ id, abilities, types, name }) => {
+  data.pokemons.map(({ id, abilities, types, name, specy }) => {
     // TODO validate the result via zod
     // TODO remove the default value and throw error incase of invalid data
+
+    console.log(specy);
+
     return {
       id,
-      abilities: abilities.map(({ ability }) => ability?.name),
       name,
+      ancestorId: specy?.evolves_from_species_id ?? null,
+      abilities: abilities.map(({ ability }) => ability?.name),
       type: types[0]?.type?.name || 'normal',
     } as CardProps;
   });
