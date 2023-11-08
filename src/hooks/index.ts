@@ -57410,6 +57410,8 @@ export type PokemonTypeFragment = { __typename?: 'pokemon_v2_pokemontype', type?
 
 export type PokemonSpecyFragment = { __typename?: 'pokemon_v2_pokemonspecies', evolves_from_species_id?: number | null };
 
+export type PokemonFragment = { __typename?: 'pokemon_v2_pokemon', id: number, name: string, height?: number | null, weight?: number | null, abilities: Array<{ __typename?: 'pokemon_v2_pokemonability', ability?: { __typename?: 'pokemon_v2_ability', name: string } | null }>, moves: Array<{ __typename?: 'pokemon_v2_pokemonmove', move?: { __typename?: 'pokemon_v2_move', name: string } | null }>, types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: { __typename?: 'pokemon_v2_type', name: string } | null }>, specy?: { __typename?: 'pokemon_v2_pokemonspecies', evolves_from_species_id?: number | null } | null, stats: Array<{ __typename?: 'pokemon_v2_pokemonstat', base_stat: number, info?: { __typename?: 'pokemon_v2_stat', name: string } | null }> };
+
 export type PokemonDecendentFragment = { __typename?: 'pokemon_v2_pokemon', id: number, name: string };
 
 export type PokemonSearchByNameQueryVariables = Exact<{
@@ -57419,12 +57421,26 @@ export type PokemonSearchByNameQueryVariables = Exact<{
 
 export type PokemonSearchByNameQuery = { __typename?: 'query_root', pokemons: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, height?: number | null, weight?: number | null, abilities: Array<{ __typename?: 'pokemon_v2_pokemonability', ability?: { __typename?: 'pokemon_v2_ability', name: string } | null }>, moves: Array<{ __typename?: 'pokemon_v2_pokemonmove', move?: { __typename?: 'pokemon_v2_move', name: string } | null }>, types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: { __typename?: 'pokemon_v2_type', name: string } | null }>, specy?: { __typename?: 'pokemon_v2_pokemonspecies', evolves_from_species_id?: number | null } | null, stats: Array<{ __typename?: 'pokemon_v2_pokemonstat', base_stat: number, info?: { __typename?: 'pokemon_v2_stat', name: string } | null }> }> };
 
-export type PokemonSearchByIdQueryVariables = Exact<{
+export type PokemonSearchByIdsQueryVariables = Exact<{
+  ids?: InputMaybe<Array<Scalars['Int']['input']> | Scalars['Int']['input']>;
+}>;
+
+
+export type PokemonSearchByIdsQuery = { __typename?: 'query_root', pokemons: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, height?: number | null, weight?: number | null, abilities: Array<{ __typename?: 'pokemon_v2_pokemonability', ability?: { __typename?: 'pokemon_v2_ability', name: string } | null }>, moves: Array<{ __typename?: 'pokemon_v2_pokemonmove', move?: { __typename?: 'pokemon_v2_move', name: string } | null }>, types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: { __typename?: 'pokemon_v2_type', name: string } | null }>, specy?: { __typename?: 'pokemon_v2_pokemonspecies', evolves_from_species_id?: number | null } | null, stats: Array<{ __typename?: 'pokemon_v2_pokemonstat', base_stat: number, info?: { __typename?: 'pokemon_v2_stat', name: string } | null }> }> };
+
+export type PokemonFindByIdQueryVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
 
 
-export type PokemonSearchByIdQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string }> };
+export type PokemonFindByIdQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, height?: number | null, weight?: number | null, abilities: Array<{ __typename?: 'pokemon_v2_pokemonability', ability?: { __typename?: 'pokemon_v2_ability', name: string } | null }>, moves: Array<{ __typename?: 'pokemon_v2_pokemonmove', move?: { __typename?: 'pokemon_v2_move', name: string } | null }>, types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: { __typename?: 'pokemon_v2_type', name: string } | null }>, specy?: { __typename?: 'pokemon_v2_pokemonspecies', evolves_from_species_id?: number | null } | null, stats: Array<{ __typename?: 'pokemon_v2_pokemonstat', base_stat: number, info?: { __typename?: 'pokemon_v2_stat', name: string } | null }> }> };
+
+export type PokemonDecendentFindByIdQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type PokemonDecendentFindByIdQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string }> };
 
 export const PokemonStatFragmentDoc = gql`
     fragment PokemonStat on pokemon_v2_pokemon {
@@ -57465,6 +57481,28 @@ export const PokemonSpecyFragmentDoc = gql`
   evolves_from_species_id
 }
     `;
+export const PokemonFragmentDoc = gql`
+    fragment Pokemon on pokemon_v2_pokemon {
+  id
+  ...PokemonStat
+  abilities: pokemon_v2_pokemonabilities(limit: 3) {
+    ...PokemonAbility
+  }
+  moves: pokemon_v2_pokemonmoves(distinct_on: order, limit: 3) {
+    ...PokemonMove
+  }
+  types: pokemon_v2_pokemontypes(limit: 3) {
+    ...PokemonType
+  }
+  specy: pokemon_v2_pokemonspecy {
+    ...PokemonSpecy
+  }
+}
+    ${PokemonStatFragmentDoc}
+${PokemonAbilityFragmentDoc}
+${PokemonMoveFragmentDoc}
+${PokemonTypeFragmentDoc}
+${PokemonSpecyFragmentDoc}`;
 export const PokemonDecendentFragmentDoc = gql`
     fragment PokemonDecendent on pokemon_v2_pokemon {
   id
@@ -57477,27 +57515,10 @@ export const PokemonSearchByNameDocument = gql`
     where: {name: {_ilike: $name}}
     order_by: {id: asc}
   ) {
-    id
-    ...PokemonStat
-    abilities: pokemon_v2_pokemonabilities(limit: 3) {
-      ...PokemonAbility
-    }
-    moves: pokemon_v2_pokemonmoves(distinct_on: order, limit: 3) {
-      ...PokemonMove
-    }
-    types: pokemon_v2_pokemontypes(limit: 3) {
-      ...PokemonType
-    }
-    specy: pokemon_v2_pokemonspecy {
-      ...PokemonSpecy
-    }
+    ...Pokemon
   }
 }
-    ${PokemonStatFragmentDoc}
-${PokemonAbilityFragmentDoc}
-${PokemonMoveFragmentDoc}
-${PokemonTypeFragmentDoc}
-${PokemonSpecyFragmentDoc}`;
+    ${PokemonFragmentDoc}`;
 
 /**
  * __usePokemonSearchByNameQuery__
@@ -57531,8 +57552,88 @@ export type PokemonSearchByNameQueryHookResult = ReturnType<typeof usePokemonSea
 export type PokemonSearchByNameLazyQueryHookResult = ReturnType<typeof usePokemonSearchByNameLazyQuery>;
 export type PokemonSearchByNameSuspenseQueryHookResult = ReturnType<typeof usePokemonSearchByNameSuspenseQuery>;
 export type PokemonSearchByNameQueryResult = Apollo.QueryResult<PokemonSearchByNameQuery, PokemonSearchByNameQueryVariables>;
-export const PokemonSearchByIdDocument = gql`
-    query PokemonSearchById($id: Int!) {
+export const PokemonSearchByIdsDocument = gql`
+    query PokemonSearchByIds($ids: [Int!]) {
+  pokemons: pokemon_v2_pokemon(where: {id: {_in: $ids}}) {
+    ...Pokemon
+  }
+}
+    ${PokemonFragmentDoc}`;
+
+/**
+ * __usePokemonSearchByIdsQuery__
+ *
+ * To run a query within a React component, call `usePokemonSearchByIdsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePokemonSearchByIdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePokemonSearchByIdsQuery({
+ *   variables: {
+ *      ids: // value for 'ids'
+ *   },
+ * });
+ */
+export function usePokemonSearchByIdsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<PokemonSearchByIdsQuery, PokemonSearchByIdsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<PokemonSearchByIdsQuery, PokemonSearchByIdsQueryVariables>(PokemonSearchByIdsDocument, options);
+      }
+export function usePokemonSearchByIdsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PokemonSearchByIdsQuery, PokemonSearchByIdsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<PokemonSearchByIdsQuery, PokemonSearchByIdsQueryVariables>(PokemonSearchByIdsDocument, options);
+        }
+export function usePokemonSearchByIdsSuspenseQuery(baseOptions?: ApolloReactHooks.SuspenseQueryHookOptions<PokemonSearchByIdsQuery, PokemonSearchByIdsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useSuspenseQuery<PokemonSearchByIdsQuery, PokemonSearchByIdsQueryVariables>(PokemonSearchByIdsDocument, options);
+        }
+export type PokemonSearchByIdsQueryHookResult = ReturnType<typeof usePokemonSearchByIdsQuery>;
+export type PokemonSearchByIdsLazyQueryHookResult = ReturnType<typeof usePokemonSearchByIdsLazyQuery>;
+export type PokemonSearchByIdsSuspenseQueryHookResult = ReturnType<typeof usePokemonSearchByIdsSuspenseQuery>;
+export type PokemonSearchByIdsQueryResult = Apollo.QueryResult<PokemonSearchByIdsQuery, PokemonSearchByIdsQueryVariables>;
+export const PokemonFindByIdDocument = gql`
+    query PokemonFindById($id: Int!) {
+  pokemon: pokemon_v2_pokemon(where: {id: {_eq: $id}}, order_by: {id: asc}) {
+    ...Pokemon
+  }
+}
+    ${PokemonFragmentDoc}`;
+
+/**
+ * __usePokemonFindByIdQuery__
+ *
+ * To run a query within a React component, call `usePokemonFindByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePokemonFindByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePokemonFindByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePokemonFindByIdQuery(baseOptions: ApolloReactHooks.QueryHookOptions<PokemonFindByIdQuery, PokemonFindByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<PokemonFindByIdQuery, PokemonFindByIdQueryVariables>(PokemonFindByIdDocument, options);
+      }
+export function usePokemonFindByIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PokemonFindByIdQuery, PokemonFindByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<PokemonFindByIdQuery, PokemonFindByIdQueryVariables>(PokemonFindByIdDocument, options);
+        }
+export function usePokemonFindByIdSuspenseQuery(baseOptions?: ApolloReactHooks.SuspenseQueryHookOptions<PokemonFindByIdQuery, PokemonFindByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useSuspenseQuery<PokemonFindByIdQuery, PokemonFindByIdQueryVariables>(PokemonFindByIdDocument, options);
+        }
+export type PokemonFindByIdQueryHookResult = ReturnType<typeof usePokemonFindByIdQuery>;
+export type PokemonFindByIdLazyQueryHookResult = ReturnType<typeof usePokemonFindByIdLazyQuery>;
+export type PokemonFindByIdSuspenseQueryHookResult = ReturnType<typeof usePokemonFindByIdSuspenseQuery>;
+export type PokemonFindByIdQueryResult = Apollo.QueryResult<PokemonFindByIdQuery, PokemonFindByIdQueryVariables>;
+export const PokemonDecendentFindByIdDocument = gql`
+    query PokemonDecendentFindById($id: Int!) {
   pokemon: pokemon_v2_pokemon(where: {id: {_eq: $id}}) {
     ...PokemonDecendent
   }
@@ -57540,34 +57641,34 @@ export const PokemonSearchByIdDocument = gql`
     ${PokemonDecendentFragmentDoc}`;
 
 /**
- * __usePokemonSearchByIdQuery__
+ * __usePokemonDecendentFindByIdQuery__
  *
- * To run a query within a React component, call `usePokemonSearchByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `usePokemonSearchByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `usePokemonDecendentFindByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePokemonDecendentFindByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = usePokemonSearchByIdQuery({
+ * const { data, loading, error } = usePokemonDecendentFindByIdQuery({
  *   variables: {
  *      id: // value for 'id'
  *   },
  * });
  */
-export function usePokemonSearchByIdQuery(baseOptions: ApolloReactHooks.QueryHookOptions<PokemonSearchByIdQuery, PokemonSearchByIdQueryVariables>) {
+export function usePokemonDecendentFindByIdQuery(baseOptions: ApolloReactHooks.QueryHookOptions<PokemonDecendentFindByIdQuery, PokemonDecendentFindByIdQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useQuery<PokemonSearchByIdQuery, PokemonSearchByIdQueryVariables>(PokemonSearchByIdDocument, options);
+        return ApolloReactHooks.useQuery<PokemonDecendentFindByIdQuery, PokemonDecendentFindByIdQueryVariables>(PokemonDecendentFindByIdDocument, options);
       }
-export function usePokemonSearchByIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PokemonSearchByIdQuery, PokemonSearchByIdQueryVariables>) {
+export function usePokemonDecendentFindByIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PokemonDecendentFindByIdQuery, PokemonDecendentFindByIdQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useLazyQuery<PokemonSearchByIdQuery, PokemonSearchByIdQueryVariables>(PokemonSearchByIdDocument, options);
+          return ApolloReactHooks.useLazyQuery<PokemonDecendentFindByIdQuery, PokemonDecendentFindByIdQueryVariables>(PokemonDecendentFindByIdDocument, options);
         }
-export function usePokemonSearchByIdSuspenseQuery(baseOptions?: ApolloReactHooks.SuspenseQueryHookOptions<PokemonSearchByIdQuery, PokemonSearchByIdQueryVariables>) {
+export function usePokemonDecendentFindByIdSuspenseQuery(baseOptions?: ApolloReactHooks.SuspenseQueryHookOptions<PokemonDecendentFindByIdQuery, PokemonDecendentFindByIdQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useSuspenseQuery<PokemonSearchByIdQuery, PokemonSearchByIdQueryVariables>(PokemonSearchByIdDocument, options);
+          return ApolloReactHooks.useSuspenseQuery<PokemonDecendentFindByIdQuery, PokemonDecendentFindByIdQueryVariables>(PokemonDecendentFindByIdDocument, options);
         }
-export type PokemonSearchByIdQueryHookResult = ReturnType<typeof usePokemonSearchByIdQuery>;
-export type PokemonSearchByIdLazyQueryHookResult = ReturnType<typeof usePokemonSearchByIdLazyQuery>;
-export type PokemonSearchByIdSuspenseQueryHookResult = ReturnType<typeof usePokemonSearchByIdSuspenseQuery>;
-export type PokemonSearchByIdQueryResult = Apollo.QueryResult<PokemonSearchByIdQuery, PokemonSearchByIdQueryVariables>;
+export type PokemonDecendentFindByIdQueryHookResult = ReturnType<typeof usePokemonDecendentFindByIdQuery>;
+export type PokemonDecendentFindByIdLazyQueryHookResult = ReturnType<typeof usePokemonDecendentFindByIdLazyQuery>;
+export type PokemonDecendentFindByIdSuspenseQueryHookResult = ReturnType<typeof usePokemonDecendentFindByIdSuspenseQuery>;
+export type PokemonDecendentFindByIdQueryResult = Apollo.QueryResult<PokemonDecendentFindByIdQuery, PokemonDecendentFindByIdQueryVariables>;

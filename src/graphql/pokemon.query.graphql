@@ -9,7 +9,7 @@ query PokemonSearchByName($name: String!) {
 }
 
 # used to fetch data for lists of visited and history
-query PokemonSearchByIds($ids: [Int]!) {
+query PokemonSearchByIds($ids: [Int!]) {
   pokemons: pokemon_v2_pokemon(where: { id: { _in: $ids } }) {
     ...Pokemon
   }
