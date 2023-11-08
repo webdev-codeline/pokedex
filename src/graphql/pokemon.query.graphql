@@ -1,23 +1,29 @@
 #import "./pokemon.fragment.graphql"
 
+# HomeScreen
+# used for searching the pokeapi
 query PokemonSearchByName($name: String!) {
   pokemons: pokemon_v2_pokemon(where: { name: { _ilike: $name } }, order_by: { id: asc }) {
     ...Pokemon
   }
 }
 
-query PokemonSearchByIds($ids: [Int]!) {
+# used to fetch data for lists of visited and history
+query PokemonSearchByIds($ids: [Int!]) {
   pokemons: pokemon_v2_pokemon(where: { id: { _in: $ids } }) {
     ...Pokemon
   }
 }
 
+# DetailsScreen
+# used to fetch data in the details screen
 query PokemonFindById($id: Int!) {
   pokemon: pokemon_v2_pokemon(where: { id: { _eq: $id } }, order_by: { id: asc }) {
     ...Pokemon
   }
 }
 
+# used to fetch decendent data in details screen
 query PokemonDecendentFindById($id: Int!) {
   pokemon: pokemon_v2_pokemon(where: { id: { _eq: $id } }) {
     ...PokemonDecendent
