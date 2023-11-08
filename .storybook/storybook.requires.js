@@ -48,6 +48,7 @@ try {
 const getStories = () => {
   return {
     "./src/stories/Card.stories.tsx": require("../src/stories/Card.stories.tsx"),
+    "./src/stories/Error.stories.tsx": require("../src/stories/Error.stories.tsx"),
     "./src/stories/EvolutionIcon.stories.tsx": require("../src/stories/EvolutionIcon.stories.tsx"),
     "./src/stories/HorizentalList.stories.tsx": require("../src/stories/HorizentalList.stories.tsx"),
     "./src/stories/Stat.stories.tsx": require("../src/stories/Stat.stories.tsx"),
