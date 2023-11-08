@@ -12,16 +12,29 @@ import client from './client';
 // styles
 import { SafeView } from './App.styles';
 import { Demo } from './src/components/Demo';
+import { IconFiles, IconNames } from './src/utils/iconNames.helper';
+import { Details } from './src/screens/Details';
+import { SvgProps } from 'react-native-svg';
+import { colors } from './src/utils/pokemonTypeColors.helper';
 
 function App() {
   return (
-    <SafeView>
-      <ApolloProvider client={client}>
-        <Text>Hello</Text>
-        <Demo></Demo>
-      </ApolloProvider>
-    </SafeView>
+    <Details
+      Icon={IconFiles.BugIcon}
+      typeColor={colors['grass']}
+      sprite={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${'1'}.png`}
+      darkenTypeColor={colors['darkenGrass']}
+      data={{
+        id: 333,
+        name: 'eevee',
+        types: ['grass', 'fire', 'normal'],
+        abilities: ['run away', 'adaptability', 'anticipation'],
+        height: 0.3,
+        weight: 0.5,
+      }}
+    />
   );
+  // return <SafeView></SafeView>;
 }
 
 let AppEntryPoint = App;
