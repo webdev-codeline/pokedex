@@ -103,7 +103,7 @@ const TypesWrapper = styled.View`
 `;
 
 const Type = styled.Text<TText>`
-  font-size: 10px;
+  font-size: 14px;
   margin-left: 8px;
   color: ${(props) => props.color};
 `;
@@ -111,14 +111,14 @@ const Type = styled.Text<TText>`
 const CardName = styled.Text`
   margin-top: 8px;
   text-align: right;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: bold;
   color: #303030;
 `;
 
 const CardDetail = styled.Text`
-  margin-top: 8px;
+  margin-top: 12px;
   text-align: right;
-  font-size: 12px;
+  font-size: 16px;
   color: #303030;
 `;

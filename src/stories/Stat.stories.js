@@ -1,13 +1,16 @@
-import { SearchBar } from '../components/SearchBar';
 import React from 'react';
-import { View } from 'react-native';
 
-const SearchData = {
-  title: 'Search',
-  component: SearchBar,
+import { View } from 'react-native';
+import { Stat } from '../components/Stat';
+import { colors } from '../utils/pokemonTypeColors.helper';
+
+const StatData = {
+  title: 'StatData',
+  component: Stat,
   args: {
-    searchText: 'Search for a pokemon...',
-    setSearchText: (searchText: string) => {},
+    name: 'hp',
+    value: 1,
+    typeColor: colors['darkenGrass'],
   },
   decorators: [
     (Story) => (
@@ -18,6 +21,6 @@ const SearchData = {
   ],
 };
 
-export default SearchData;
+export default StatData;
 
 export const Basic = {};

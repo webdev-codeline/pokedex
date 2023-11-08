@@ -181,6 +181,8 @@ const IdContainer = styled.View<TStyledComponent>`
 
 const IdNumber = styled.Text`
   color: #fff;
+  font-size: 18px;
+  font-weight: 600;
 `;
 
 const TypesContainer = styled.View`
@@ -196,7 +198,7 @@ const TypesContainer = styled.View`
 `;
 
 const Type = styled.Text<TStyledComponent>`
-  font-size: 10px;
+  font-size: 14px;
   margin-right: 5px;
   margin-bottom: 8px;
   padding: 2px 10px;
@@ -222,11 +224,13 @@ const AbilitiesContainer = styled.View<TStyledComponent>`
 const AbilitiesTitle = styled.Text`
   color: #fff;
   margin-top: 40px;
+  font-size: 20px;
+  font-weight: 600;
 `;
 
 const Ability = styled.Text`
   color: #dddddd;
-  font-size: 12px;
+  font-size: 16px;
   margin-bottom: 5px;
 `;
 
@@ -248,7 +252,7 @@ const MainDetailsContainer = styled.View`
 
 const Name = styled.Text`
   color: #fff;
-  font-size: 24px;
+  font-size: 44px;
   margin-bottom: 20px;
   font-weight: 700;
 `;
@@ -276,12 +280,12 @@ const PhysicalDetails = styled.View`
 
 const PhysicalTitle = styled.Text`
   color: #000;
-  font-size: 12px;
+  font-size: 18px;
 `;
 
 const PhysicalValue = styled.Text`
   color: #1f1f1f;
-  font-size: 10px;
+  font-size: 16px;
 `;
 
 const BaseContainer = styled.View`
@@ -304,17 +308,17 @@ const BaseTitleWrapper = styled.View`
 
 const BaseTitle = styled.Text`
   color: #1f1f1f;
-  font-size: 10px;
+  font-size: 14px;
   margin-top: 10px;
 `;
 
 const BasePoint = styled.Text<TStyledComponent>`
   color: ${(props) => props.color ?? '#000'};
-  font-size: 42px;
+  font-size: 58px;
 `;
 
 const BaseText = styled.Text<TStyledComponent>`
-  font-size: 12px;
+  font-size: 16px;
   color: #fff;
   width: 60%;
   padding: 24px 16px;
@@ -348,7 +352,7 @@ const EvolutionContainer = styled.View<TStyledComponent>`
 const EvolutionTitle = styled.Text`
   margin-bottom: 32px;
   margin-left: 10px;
-  font-size: 18px;
+  font-size: 32px;
   font-weight: 700;
   color: #fff;
 `;

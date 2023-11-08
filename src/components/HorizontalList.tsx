@@ -51,7 +51,7 @@ const ListContainer = styled.View`
 
 const ListTitle = styled.Text`
   margin-left: 16px;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   color: #333;
 `;
@@ -66,6 +66,6 @@ const ListEmptyContainer = styled.View`
 `;
 
 const ListEmpty = styled.Text`
-  font-size: 14px;
+  font-size: 16px;
   color: #333;
 `;

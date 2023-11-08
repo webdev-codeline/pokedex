@@ -38,7 +38,8 @@ const StatContainer = styled.View`
 `;
 
 const StatTitle = styled.Text`
-  font-size: 14px;
+  font-size: 20px;
+  font-weight: 600;
   color: #222222;
   padding-left: 12px;
 `;
