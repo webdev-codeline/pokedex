@@ -1,12 +1,8 @@
 import React from 'react';
-import styled from 'styled-components/native';
 import { SvgProps } from 'react-native-svg';
-import { colors } from '../utils/pokemonTypeColors.helper';
+import styled from 'styled-components/native';
 import { IconFiles, IconNames } from '../utils/iconNames.helper';
-
-type TText = {
-  color: string;
-};
+import { PokemonTypes, colors } from '../utils/pokemonTypeColors.helper';
 
 export type TCard = {
   id: number;
@@ -17,11 +13,15 @@ export const Card = ({ id }: TCard) => {
   const data = {
     id,
     name: 'eevee',
-    types: ['grass', 'poison'],
+    types: ['grass', 'poison'] as PokemonTypes[],
     abilities: ['run away', 'adaptability', 'anticipation'],
   };
 
-  const Icon: React.FC<SvgProps> = IconFiles[IconNames[data.types[0]]];
+  const {
+    types: [type],
+  } = data;
+
+  const Icon: React.FC<SvgProps> = IconFiles[IconNames[type!]];
 
   return (
     <CardContainer>
@@ -37,9 +37,9 @@ export const Card = ({ id }: TCard) => {
         </CardIcon>
         <TypesWrapper>
           {data.types.map((t, index) => (
-            <Type color={colors[t]} key={index}>
+            <TypeText color={colors[t]} key={index}>
               {t}
-            </Type>
+            </TypeText>
           ))}
         </TypesWrapper>
         <CardName>{data.name}</CardName>
@@ -107,10 +107,10 @@ const TypesWrapper = styled.View`
   text-transform: capitalize;
 `;
 
-const Type = styled.Text<TText>`
+const TypeText = styled.Text<{ color: string }>`
   font-size: 14px;
   margin-left: 8px;
-  color: ${(props) => props.color};
+  color: ${({ color }) => color};
 `;
 
 const CardName = styled.Text`

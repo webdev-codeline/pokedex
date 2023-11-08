@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 
 export type TStat = {
@@ -14,16 +14,17 @@ type TCircles = {
 };
 
 export const Stat = ({ name, value, typeColor }: TStat) => {
-  const [circleCount, setCircleCount] = useState([1, 2, 3, 4, 5, 6]);
   return (
     <StatContainer>
       <StatTitle>
         {name === 'hp' ? name.toUpperCase() : name.charAt(0).toUpperCase() + name.slice(1).replace('-', ' ')}
       </StatTitle>
       <StatPointsWrapper>
-        {circleCount.map((c) => (
-          <StatPointsCircles key={c} value={value} index={c} typeColor={typeColor} />
-        ))}
+        {Array(6)
+          .fill(0)
+          .map((c) => (
+            <StatPointsCircles key={c} value={value} index={c} typeColor={typeColor} />
+          ))}
       </StatPointsWrapper>
     </StatContainer>
   );

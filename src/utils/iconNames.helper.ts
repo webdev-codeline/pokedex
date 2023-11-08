@@ -17,6 +17,8 @@ import RockIcon from '../assets/icons/rock.svg';
 import SteelIcon from '../assets/icons/steel.svg';
 import WaterIcon from '../assets/icons/water.svg';
 
+import { PokemonTypes } from './pokemonTypeColors.helper';
+
 export const IconFiles = {
   BugIcon,
   DarkIcon,
@@ -38,23 +40,23 @@ export const IconFiles = {
   WaterIcon,
 };
 
-export const IconNames: { [key: string]: keyof typeof IconFiles } = {
-  bug: 'BugIcon',
-  dark: 'DarkIcon',
-  dragon: 'DragonIcon',
-  electric: 'ElectricIcon',
-  fairy: 'FairyIcon',
-  fighting: 'FightingIcon',
-  fire: 'FireIcon',
-  flying: 'FlyingIcon',
-  ghost: 'GhostIcon',
-  grass: 'GrassIcon',
-  ground: 'GroundIcon',
-  ice: 'IceIcon',
+export const IconNames: { [K in PokemonTypes]: keyof typeof IconFiles } = {
   normal: 'NormalIcon',
-  poison: 'PoisonIcon',
-  psychic: 'PsychicIcon',
-  rock: 'RockIcon',
-  steel: 'SteelIcon',
+  fire: 'FireIcon',
   water: 'WaterIcon',
+  electric: 'ElectricIcon',
+  grass: 'GrassIcon',
+  ice: 'IceIcon',
+  fighting: 'FightingIcon',
+  poison: 'PoisonIcon',
+  ground: 'GroundIcon',
+  flying: 'FlyingIcon',
+  psychic: 'PsychicIcon',
+  bug: 'BugIcon',
+  rock: 'RockIcon',
+  ghost: 'GhostIcon',
+  dragon: 'DragonIcon',
+  dark: 'DarkIcon',
+  steel: 'SteelIcon',
+  fairy: 'FairyIcon',
 };

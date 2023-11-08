@@ -1,46 +1,34 @@
 // react
 import React from 'react';
 
+import { Text, View } from 'react-native';
+// react-navigation
+
 // libs
+import { Demo } from '@/components/Demo';
 import Constants from 'expo-constants';
 
 // configs
 // import client from './client';
 
 // styles
-import { Details } from './src/screens/Details';
-import { IconFiles, IconNames } from './src/utils/iconNames.helper';
-import { colors } from './src/utils/pokemonTypeColors.helper';
+// import { DetailsScreen } from './src/screens/DetailsScreen';
+
+// const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <Details
-      Icon={IconFiles[IconNames['grass']]}
-      typeColor={colors['grass']}
-      darkenTypeColor={colors['darkenGrass']}
-      data={{
-        id: 333,
-        name: 'eevee',
-        types: ['grass', 'fire', 'normal'],
-        abilities: ['run away', 'adaptability', 'anticipation'],
-        height: 0.3,
-        weight: 0.5,
-        baseStatsTotal: 325,
-        baseStatsText:
-          'Its genetic code is irregular. It may mutate if it is exposed to radiation from element STONEs.',
-        stats: [
-          { name: 'hp', value: 4 },
-          { name: 'attack', value: 1 },
-          { name: 'defense', value: 6 },
-          { name: 'special-attack', value: 2 },
-          { name: 'special-defense', value: 3 },
-          { name: 'speed', value: 5 },
-        ],
-        evolutionIds: [2, 4, 6, 8, 10, 12],
-      }}
-    />
+    <View style={{ flex: 1, backgroundColor: 'red' }}>
+      <Text>Open up App/ to start working on your app!</Text>
+      <Demo></Demo>
+    </View>
+    // <NavigationContainer>
+    //   <Stack.Navigator initialRouteName='Home'>
+    //     <Stack.Screen name='Home' component={Home} />
+    //     {/* <Stack.Screen name='Details' component={DetailsScreen} /> */}
+    //   </Stack.Navigator>
+    // </NavigationContainer>
   );
-  // return <SafeView></SafeView>;
 }
 
 let AppEntryPoint = App;

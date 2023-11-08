@@ -1,8 +1,4 @@
-type ColorMap = {
-  [key: string]: string;
-};
-
-const pokemonColors: ColorMap = {
+const pokemonColors = {
   normal: '#A8A77A',
   fire: '#EE8130',
   water: '#6390F0',
@@ -23,6 +19,23 @@ const pokemonColors: ColorMap = {
   fairy: '#D685AD',
 };
 
+export type PokemonTypes = Extract<keyof typeof pokemonColors, string>;
+export type DarkenPokemonTypes = `darken${Capitalize<PokemonTypes>}`;
+export type PokemonColors = PokemonTypes | DarkenPokemonTypes;
+
+export type LightColorMap = {
+  [key in PokemonTypes]: string;
+};
+export type DarkColorMap = {
+  [key in DarkenPokemonTypes]: string;
+};
+export type PokemonColorMap = {
+  [key in PokemonColors]: string;
+};
+
+const toHexCode = (value: number) => `${value.toString(16).padStart(2, '0')}`;
+const rgbToHex = (r: number) => (g: number) => (b: number) => `#${toHexCode(r)}${toHexCode(g)}${toHexCode(b)}`;
+
 const darkenColor = (color: string): string => {
   const hex = color.replace('#', '');
   const [r, g, b] = hex.match(/.{1,2}/g)?.map((component) => parseInt(component, 16)) || [];
@@ -35,25 +48,27 @@ const darkenColor = (color: string): string => {
   const darkenedG = Math.max(0, Math.round(g * 0.8));
   const darkenedB = Math.max(0, Math.round(b * 0.8));
 
-  return `#${darkenedR.toString(16).padStart(2, '0')}${darkenedG.toString(16).padStart(2, '0')}${darkenedB
-    .toString(16)
-    .padStart(2, '0')}`;
+  return rgbToHex(darkenedR)(darkenedG)(darkenedB);
 };
 
-const pokemonColorsWithDarken: ColorMap = {};
+export const toDarkKey = (type: PokemonTypes) =>
+  `darken${type.charAt(0).toUpperCase()}${type.slice(1)}` as DarkenPokemonTypes;
 
-Object.keys(pokemonColors).forEach((type) => {
-  const color = pokemonColors[type];
-  const darkenType = `darken${type.charAt(0).toUpperCase()}${type.slice(1)}`;
-  const darkenValue = darkenColor(color!);
-  pokemonColorsWithDarken[darkenType] = darkenValue;
+const pokemonColorsWithDarken: DarkColorMap | Partial<DarkColorMap> = {};
+
+Object.keys(pokemonColors).forEach((type: string) => {
+  const pType = type as PokemonTypes;
+  const color = pokemonColors[pType];
+  const darken: PokemonColors = toDarkKey(pType);
+  const darkenValue = darkenColor(color);
+  pokemonColorsWithDarken[darken] = darkenValue;
 });
 
-const getPokemonColor = (type: string): string => pokemonColors[type] || '#777';
+export const colors: PokemonColorMap = {
+  ...(pokemonColors as LightColorMap),
+  ...(pokemonColorsWithDarken as DarkColorMap),
+};
+
+const getPokemonColor = (type: PokemonTypes): string => pokemonColors[type] || '#777';
 
 export default getPokemonColor;
-
-export const colors = {
-  ...pokemonColors,
-  ...pokemonColorsWithDarken,
-};

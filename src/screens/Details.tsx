@@ -2,10 +2,10 @@ import React from 'react';
 
 import { ScrollView } from 'react-native';
 import { SvgProps } from 'react-native-svg';
-import { Stat } from '../components/Stat';
 import { styled } from 'styled-components/native';
-import { colors } from '../utils/pokemonTypeColors.helper';
 import { EvolutionIcon } from '../components/EvolutionIcon';
+import { Stat } from '../components/Stat';
+import { PokemonTypes, colors, toDarkKey } from '../utils/pokemonTypeColors.helper';
 
 type TStat = {
   name: string;
@@ -15,14 +15,13 @@ type TStat = {
 type TData = {
   id: number;
   name: string;
-  types: string[];
+  types: PokemonTypes[];
   abilities: string[];
   weight: number;
   height: number;
   baseStatsTotal: number;
   baseStatsText: string;
   stats: TStat[];
-  // ! beware evolutionIds maximum is 6
   evolutionIds: number[];
 };
 
@@ -56,7 +55,7 @@ export const Details = ({ Icon, typeColor, darkenTypeColor, data }: TDetails) =>
 
             <TypesContainer>
               {data.types.map((type, index) => (
-                <Type key={index} bgcolor={colors[`darken${type.charAt(0).toUpperCase()}${type.slice(1)}`]}>
+                <Type key={index} bgcolor={colors[toDarkKey(type)]}>
                   {type}
                 </Type>
               ))}
