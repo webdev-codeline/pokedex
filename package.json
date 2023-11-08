@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.6",
+    "@react-navigation/native-stack": "^6.9.17",
     "cross-env": "^7.0.3",
     "expo": "^48.0.0",
     "expo-constants": "~14.2.1",
@@ -25,6 +26,8 @@
     "graphql": "^16.8.1",
     "react": "18.2.0",
     "react-native": "0.71.14",
+    "react-native-safe-area-context": "4.5.0",
+    "react-native-screens": "~3.20.0",
     "react-native-svg": "13.4.0",
     "react-native-svg-transformer": "^1.1.0",
     "react-redux": "^8.1.3",
