@@ -57422,7 +57422,7 @@ export type PokemonSearchByNameQueryVariables = Exact<{
 export type PokemonSearchByNameQuery = { __typename?: 'query_root', pokemons: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, height?: number | null, weight?: number | null, abilities: Array<{ __typename?: 'pokemon_v2_pokemonability', ability?: { __typename?: 'pokemon_v2_ability', name: string } | null }>, moves: Array<{ __typename?: 'pokemon_v2_pokemonmove', move?: { __typename?: 'pokemon_v2_move', name: string } | null }>, types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: { __typename?: 'pokemon_v2_type', name: string } | null }>, specy?: { __typename?: 'pokemon_v2_pokemonspecies', evolves_from_species_id?: number | null } | null, stats: Array<{ __typename?: 'pokemon_v2_pokemonstat', base_stat: number, info?: { __typename?: 'pokemon_v2_stat', name: string } | null }> }> };
 
 export type PokemonSearchByIdsQueryVariables = Exact<{
-  ids?: InputMaybe<Array<Scalars['Int']['input']> | Scalars['Int']['input']>;
+  ids: Array<Scalars['Int']['input']> | Scalars['Int']['input'];
 }>;
 
 
@@ -57556,7 +57556,7 @@ export type PokemonSearchByNameLazyQueryHookResult = ReturnType<typeof usePokemo
 export type PokemonSearchByNameSuspenseQueryHookResult = ReturnType<typeof usePokemonSearchByNameSuspenseQuery>;
 export type PokemonSearchByNameQueryResult = Apollo.QueryResult<PokemonSearchByNameQuery, PokemonSearchByNameQueryVariables>;
 export const PokemonSearchByIdsDocument = gql`
-    query PokemonSearchByIds($ids: [Int!]) {
+    query PokemonSearchByIds($ids: [Int!]!) {
   pokemons: pokemon_v2_pokemon(where: {id: {_in: $ids}}) {
     ...Pokemon
   }
@@ -57579,7 +57579,7 @@ export const PokemonSearchByIdsDocument = gql`
  *   },
  * });
  */
-export function usePokemonSearchByIdsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<PokemonSearchByIdsQuery, PokemonSearchByIdsQueryVariables>) {
+export function usePokemonSearchByIdsQuery(baseOptions: ApolloReactHooks.QueryHookOptions<PokemonSearchByIdsQuery, PokemonSearchByIdsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return ApolloReactHooks.useQuery<PokemonSearchByIdsQuery, PokemonSearchByIdsQueryVariables>(PokemonSearchByIdsDocument, options);
       }

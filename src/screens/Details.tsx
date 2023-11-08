@@ -21,7 +21,9 @@ import { EvolutionIcon } from '@components/EvolutionIcon';
 import { Stat } from '@components/Stat';
 
 // styles
+import { addVisit } from '@/redux/visitSlice';
 import { toDetailsData } from '@/utils/convert.helper';
+import { useDispatch } from 'react-redux';
 import {
   AbilitiesContainer,
   AbilitiesTitle,
@@ -53,6 +55,8 @@ import {
 export const Details = ({ route, navigation }: any) => {
   const { id, ancestorId, type }: NavigationInput = route.params;
 
+  const dispatch = useDispatch();
+
   const { loading: ancestorLoading, data: ancestorData } = usePokemonAncestorFindByIdQuery({
     skip: !ancestorId,
     variables: { id: ancestorId ?? 1 },
@@ -69,8 +73,10 @@ export const Details = ({ route, navigation }: any) => {
   }
 
   useEffect(() => {
-    // TODO add the id to visited list
-  }, []);
+    if (id) {
+      dispatch(addVisit({ entry: id }));
+    }
+  }, [id]);
 
   const onAncestorPress = ({ id, type }: NavigationInput) => {
     navigation.push('Details', {
@@ -113,7 +119,7 @@ export const Details = ({ route, navigation }: any) => {
                   <IdNumber>Id: {id}</IdNumber>
                 </IdContainer>
 
-                <TypesContainer>
+                <TypesContainer length={mappedData.types.length}>
                   {mappedData.types.map((type, index) => (
                     <Type key={index} bgcolor={colors[toDarkKey(type)]}>
                       {type.toUpperCase()}

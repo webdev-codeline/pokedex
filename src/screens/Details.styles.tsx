@@ -67,7 +67,7 @@ export const IdNumber = styled.Text`
   font-weight: 600;
 `;
 
-export const TypesContainer = styled.View`
+export const TypesContainer = styled.View<{ length: number }>`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -76,7 +76,7 @@ export const TypesContainer = styled.View`
   position: absolute;
   max-width: 200px;
   top: 10px;
-  left: -40px;
+  left: ${({ length }) => (length > 1 ? '-65px' : '-15px')};
 `;
 
 export const Type = styled.Text<StyleInput>`

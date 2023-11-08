@@ -12,9 +12,6 @@ export const toCardData = (data: PokemonSearchByNameQuery) =>
   data.pokemons.map(({ id, abilities, types, name, specy }) => {
     // TODO validate the result via zod
     // TODO remove the default value and throw error incase of invalid data
-
-    console.log(specy);
-
     return {
       id,
       name,

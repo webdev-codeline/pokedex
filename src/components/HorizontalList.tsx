@@ -36,7 +36,6 @@ export const HorizontalList: FC<HorizontalListProps> = ({ data, title, emptyMess
               type={type}
               ancestorId={ancestorId}
               onPressCallback={() => {
-                console.log({ id, type, ancestorId });
                 onPressCallback({ id, type, ancestorId });
               }}
             />

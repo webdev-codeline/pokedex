@@ -6,6 +6,10 @@ import React from 'react';
 // libs
 import { ApolloProvider } from '@apollo/client';
 import Constants from 'expo-constants';
+import { Provider } from 'react-redux';
+
+// redux
+import { store } from '@redux/store';
 
 // configs
 import client from './client';
@@ -19,12 +23,14 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <ApolloProvider client={client}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName='Home'>
-          <Stack.Screen name='Home' component={Home} />
-          <Stack.Screen name='Details' component={Details} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName='Home'>
+            <Stack.Screen name='Home' component={Home} />
+            <Stack.Screen name='Details' component={Details} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     </ApolloProvider>
   );
 }
