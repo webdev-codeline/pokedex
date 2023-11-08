@@ -44,11 +44,11 @@ export const Card = (props: CardProps) => {
   // todo remove initial data, this is for test
   const { id, name, type, abilities } = props || cardDefaultValues;
 
-  const Icon: React.FC<SvgProps> = IconFiles[IconNames[type!]];
+  const Icon: React.FC<SvgProps> = IconFiles[IconNames[type]];
 
   return (
     <CardContainer>
-      <SpritesBack source={{ uri: typeToBackgroundUri(type!) }}>
+      <SpritesBack source={{ uri: typeToBackgroundUri(type) }}>
         <Sprite source={{ uri: idToSpriteUri(id) }} style={{ width: 200, height: 200 }} />
       </SpritesBack>
 
@@ -57,7 +57,7 @@ export const Card = (props: CardProps) => {
           <Icon width={40} height={40} />
         </CardIcon>
         <TypesWrapper>
-          <TypeText color={colors[type!]}>{type}</TypeText>
+          <TypeText color={colors[type]}>{type}</TypeText>
         </TypesWrapper>
 
         <CardName>{name.toUpperCase()}</CardName>
