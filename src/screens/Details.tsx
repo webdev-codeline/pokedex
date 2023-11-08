@@ -100,7 +100,7 @@ const Header = styled.View`
   justify-content: center;
   align-items: center;
   width: 95%;
-  margin-bottom: 100px;
+  margin-bottom: 20px;
 `;
 
 const HeaderMainBG = styled.View<TStyledComponent>`
@@ -259,24 +259,25 @@ const BaseTitleWrapper = styled.View`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  width: 35%;
   height: 200px;
 `;
 
 const BaseTitle = styled.Text`
   color: #1f1f1f;
   font-size: 10px;
+  margin-top: 10px;
 `;
 
 const BasePoint = styled.Text<TStyledComponent>`
   color: ${(props) => props.color ?? '#000'};
-  font-size: 32px;
+  font-size: 42px;
 `;
 
 const BaseText = styled.Text<TStyledComponent>`
   font-size: 12px;
   color: #fff;
-  width: 65%;
+  width: 60%;
   padding: 24px 16px;
   border-radius: 24px;
   background-color: ${(props) => props.bgcolor ?? '#313131'};
