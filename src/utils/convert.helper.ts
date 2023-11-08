@@ -1,2 +1,4 @@
+export const capitalizeFirstLetter = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
+
 export const statNameToTile = (name: string) =>
-  name === 'hp' ? name.toUpperCase() : name.charAt(0).toUpperCase() + name.slice(1).replace('-', ' ');
+  name === 'hp' ? name.toUpperCase() : capitalizeFirstLetter(name).replace('-', ' ');

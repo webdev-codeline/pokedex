@@ -8,7 +8,15 @@ export const CardContainer = styled.TouchableOpacity`
   width: 350px;
   height: 220px;
   background: #fff;
-  box-shadow: 0 16px 40px rgba(34, 35, 58, 0.25);
+  /* Shadow properties for Android */
+  elevation: 3;
+
+  /* Shadow properties for iOS */
+  shadow-offset: 0px 2px;
+  shadow-color: black;
+  shadow-opacity: 0.2;
+  shadow-radius: 4px;
+
   overflow: hidden;
   color: #333;
 `;
@@ -57,8 +65,9 @@ export const TypesWrapper = styled.View`
 `;
 
 export const TypeText = styled.Text<{ color: string }>`
-  font-size: 14px;
-  margin-left: 8px;
+  font-size: 27px;
+  font-weight: bold;
+  margin-left: 2px;
   color: ${({ color }) => color};
 `;
 

@@ -5,6 +5,7 @@ import React from 'react';
 import { SvgProps } from 'react-native-svg';
 
 // helpers
+import { capitalizeFirstLetter } from '@/utils/convert.helper';
 import { colors } from '@utils/colors.helper';
 import { IconFiles, IconNames, idToSpriteUri, typeToBackgroundUri } from '@utils/icons.helper';
 
@@ -57,13 +58,13 @@ export const Card = (props: CardProps) => {
           <Icon width={40} height={40} />
         </CardIcon>
         <TypesWrapper>
-          <TypeText color={colors[type]}>{type}</TypeText>
+          <TypeText color={colors[type]}>{capitalizeFirstLetter(type)}</TypeText>
         </TypesWrapper>
 
         <CardName>{name.toUpperCase()}</CardName>
 
         {abilities.map((a, index) => (
-          <Abilities key={index}>{a}</Abilities>
+          <Abilities key={index}>{capitalizeFirstLetter(a)}</Abilities>
         ))}
       </CardData>
     </CardContainer>
