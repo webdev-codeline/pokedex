@@ -7,7 +7,7 @@ const IconData = {
   title: 'IconData',
   component: EvolutionIcon,
   args: {
-    pokemonId: 2;
+    pokemonId: 2,
   },
   decorators: [
     (Story) => (
@@ -16,7 +16,7 @@ const IconData = {
       </View>
     ),
   ],
-}
+};
 
 export default IconData;
 
