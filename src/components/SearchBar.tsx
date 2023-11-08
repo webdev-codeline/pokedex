@@ -6,10 +6,10 @@ import styled from 'styled-components/native';
 
 type SearchBarProps = {
   searchText?: string;
-  setSearchText: (newSearchText: string) => void;
+  onChangeTextCallback: (newSearchText: string) => void;
 };
 
-export const SearchBar: FC<SearchBarProps> = ({ searchText, setSearchText }) => {
+export const SearchBar: FC<SearchBarProps> = ({ searchText, onChangeTextCallback: setSearchText }) => {
   return (
     <SearchBarContainer>
       <SearchInput

@@ -1,15 +1,15 @@
 // react
 import React from 'react';
 
-import { Text, View } from 'react-native';
 // react-navigation
 
 // libs
-import { Demo } from '@/components/Demo';
+import { Home } from '@/screens/Home';
+import { ApolloProvider } from '@apollo/client';
 import Constants from 'expo-constants';
 
 // configs
-// import client from './client';
+import client from './client';
 
 // styles
 // import { DetailsScreen } from './src/screens/DetailsScreen';
@@ -18,10 +18,14 @@ import Constants from 'expo-constants';
 
 function App() {
   return (
-    <View style={{ flex: 1, backgroundColor: 'red' }}>
-      <Text>Open up App/ to start working on your app!</Text>
-      <Demo></Demo>
-    </View>
+    // <View style={{ flex: 1, backgroundColor: 'red' }}>
+    //   <Text>Open up App/ to start working on your app!</Text>
+    //   <Demo></Demo>
+    // </View>
+    <ApolloProvider client={client}>
+      <Home />
+    </ApolloProvider>
+
     // <NavigationContainer>
     //   <Stack.Navigator initialRouteName='Home'>
     //     <Stack.Screen name='Home' component={Home} />

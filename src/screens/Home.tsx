@@ -6,36 +6,56 @@ import { ActivityIndicator, ScrollView } from 'react-native';
 import { styled } from 'styled-components/native';
 
 // components
+import { CardProps } from '@/components/Card';
+import { usePokemonSearchByNameLazyQuery } from '@/hooks';
+import { wrapIn } from '@/utils/input.helper';
 import { HorizontalList } from '@components/HorizontalList';
 import { SearchBar } from '@components/SearchBar';
 
 export const Home = () => {
   const [searchText, setSearchText] = useState<string>();
 
-  const [loading, setLoading] = useState(true);
+  // TODO use error to render error compoenet
+  const [searchPokemons, { loading, error, data }] = usePokemonSearchByNameLazyQuery();
 
-  setInterval(() => {
-    setLoading(false);
-  }, 3000);
+  let mappedSearchData: CardProps[] = [];
+
+  if (!loading && data) {
+    mappedSearchData = data.pokemons.map(({ id, abilities, types, name }) => {
+      // TODO validate the result via zod
+      // TODO remove the default value and throw error incase of invalid data
+      return {
+        id,
+        abilities: abilities.map(({ ability }) => ability?.name),
+        name,
+        type: types[0]?.type?.name || 'normal',
+      } as CardProps;
+    });
+  }
+
+  // TODO add debounce for this request
+  const onSearch = (newInput: string) => {
+    setSearchText(newInput);
+
+    searchPokemons({ variables: { name: wrapIn('%')(newInput) } });
+  };
 
   return (
     <ScrollView>
-      {loading ? (
-        <LoadingContainer>
-          <ActivityIndicator size='large' color={'#000'} />
-        </LoadingContainer>
-      ) : (
-        <HomeContainer>
-          <SearchBar searchText={searchText} setSearchText={setSearchText} />
-          {/* todo add data lists here: */}
-          {/* TODO add loading here add data lists here: */}
+      <HomeContainer>
+        <SearchBar searchText={searchText} onChangeTextCallback={onSearch} />
 
-          {!searchText && <HorizontalList title='Searched Before' data={[]} />}
-          <HorizontalList title='Visited Lately' data={[]} />
-          <HorizontalList title='Fav' data={[]} />
-          {searchText && <HorizontalList title='Visited' data={[]} />}
-        </HomeContainer>
-      )}
+        {loading ? (
+          <LoadingContainer>
+            <ActivityIndicator size='large' color={'#000'} />
+          </LoadingContainer>
+        ) : (
+          searchText && <HorizontalList title={`Result for: "${searchText}" `} data={mappedSearchData} />
+        )}
+
+        <HorizontalList title='Searched: ' data={[]} />
+        <HorizontalList title='Visited: ' data={[]} />
+      </HomeContainer>
     </ScrollView>
   );
 };
