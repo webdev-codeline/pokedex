@@ -32,6 +32,27 @@ fragment PokemonSpecy on pokemon_v2_pokemonspecies {
   evolves_from_species_id
 }
 
+fragment Pokemon on pokemon_v2_pokemon {
+  id
+  ...PokemonStat
+
+  abilities: pokemon_v2_pokemonabilities(limit: 3) {
+    ...PokemonAbility
+  }
+
+  moves: pokemon_v2_pokemonmoves(distinct_on: order, limit: 3) {
+    ...PokemonMove
+  }
+
+  types: pokemon_v2_pokemontypes(limit: 3) {
+    ...PokemonType
+  }
+
+  specy: pokemon_v2_pokemonspecy {
+    ...PokemonSpecy
+  }
+}
+
 fragment PokemonDecendent on pokemon_v2_pokemon {
   id
   name

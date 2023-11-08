@@ -1,0 +1,25 @@
+#import "./pokemon.fragment.graphql"
+
+query PokemonSearchByName($name: String!) {
+  pokemons: pokemon_v2_pokemon(where: { name: { _ilike: $name } }, order_by: { id: asc }) {
+    ...Pokemon
+  }
+}
+
+query PokemonSearchByIds($ids: [Int]!) {
+  pokemons: pokemon_v2_pokemon(where: { id: { _in: $ids } }) {
+    ...Pokemon
+  }
+}
+
+query PokemonFindById($id: Int!) {
+  pokemon: pokemon_v2_pokemon(where: { id: { _eq: $id } }, order_by: { id: asc }) {
+    ...Pokemon
+  }
+}
+
+query PokemonDecendentFindById($id: Int!) {
+  pokemon: pokemon_v2_pokemon(where: { id: { _eq: $id } }) {
+    ...PokemonDecendent
+  }
+}
