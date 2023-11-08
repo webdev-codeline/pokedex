@@ -1,10 +1,22 @@
 import React from 'react';
-
 import { View } from 'react-native';
 import { Stat } from '../components/Stat';
 import { colors } from '../utils/pokemonTypeColors.helper';
 
-const StatData = {
+type TStatDataProps = {
+  title: string;
+  component: React.FC<any>;
+  args: TArgs;
+  decorators: Array<(Story: React.FC) => JSX.Element>;
+};
+
+type TArgs = {
+  name: string;
+  value: number;
+  typeColor: string;
+};
+
+const StatData: TStatDataProps = {
   title: 'StatData',
   component: Stat,
   args: {
@@ -13,7 +25,7 @@ const StatData = {
     typeColor: colors['darkenGrass'],
   },
   decorators: [
-    (Story) => (
+    (Story: React.FC) => (
       <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
         <Story />
       </View>

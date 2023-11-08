@@ -47,10 +47,10 @@ try {
 
 const getStories = () => {
   return {
-    "./src/stories/Card.stories.js": require("../src/stories/Card.stories.js"),
-    "./src/stories/EvolutionIcon.stories.js": require("../src/stories/EvolutionIcon.stories.js"),
-    "./src/stories/HorizentalList.stories.js": require("../src/stories/HorizentalList.stories.js"),
-    "./src/stories/Stat.stories.js": require("../src/stories/Stat.stories.js"),
+    "./src/stories/Card.stories.tsx": require("../src/stories/Card.stories.tsx"),
+    "./src/stories/EvolutionIcon.stories.tsx": require("../src/stories/EvolutionIcon.stories.tsx"),
+    "./src/stories/HorizentalList.stories.tsx": require("../src/stories/HorizentalList.stories.tsx"),
+    "./src/stories/Stat.stories.tsx": require("../src/stories/Stat.stories.tsx"),
   };
 };
 

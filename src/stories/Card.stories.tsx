@@ -5,16 +5,31 @@ import { Card } from '../components/Card';
 import { colors } from '../utils/pokemonTypeColors.helper';
 
 import { IconFiles, IconNames } from '../utils/iconNames.helper';
+import { SvgProps } from 'react-native-svg';
 
-const CardData = {
+type TCardDataProps = {
+  title: string;
+  component: React.FC<any>;
+  args: TArgs;
+  decorators: ((Story: React.FC<{}>) => JSX.Element)[];
+};
+
+type TArgs = {
+  name: string;
+  details: string[];
+  spriteUrl: string;
+  spriteBack: string;
+  Icon: React.FC<SvgProps>;
+  types: { name: string; textColor: string }[];
+};
+
+const CardData: TCardDataProps = {
   title: 'CardData',
   component: Card,
   args: {
     name: 'pokemon',
     details: ['detail1', 'detail2', 'detail3'],
-    // todo add pokemon id to below url
     spriteUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${'1'}.png`,
-    // todo add pokemon first type name to these 4 below
     spriteBack: `https://kai-tw.github.io/PokeCard/backgrounds/${'grass'}.png`,
     Icon: IconFiles[IconNames['grass']],
     types: [
@@ -23,7 +38,7 @@ const CardData = {
     ],
   },
   decorators: [
-    (Story) => (
+    (Story: React.FC) => (
       <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
         <Story />
       </View>

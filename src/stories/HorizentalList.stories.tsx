@@ -4,8 +4,36 @@ import { View } from 'react-native';
 import { colors } from '../utils/pokemonTypeColors.helper';
 
 import { IconFiles, IconNames } from '../utils/iconNames.helper';
+import { SvgProps } from 'react-native-svg';
 
-const ListData = {
+type PokemonType = {
+  name: string;
+  textColor: string;
+};
+
+type PokemonData = {
+  name: string;
+  details: string[];
+  spriteUrl: string;
+  spriteBack: string;
+  Icon: React.FC<SvgProps>;
+  types: PokemonType[];
+};
+
+type TListDataProps = {
+  title: string;
+  component: React.FC<any>;
+  args: TArgs;
+  decorators: ((Story: React.FC<{}>) => JSX.Element)[];
+};
+
+type TArgs = {
+  title: string;
+  emptyMessage: string;
+  data: PokemonData[];
+};
+
+const ListData: TListDataProps = {
   title: 'ListData',
   component: HorizontalList,
   args: {
@@ -15,9 +43,7 @@ const ListData = {
       {
         name: 'pokemon',
         details: ['detail1', 'detail2', 'detail3'],
-        // todo add pokemon id to below url
         spriteUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${'1'}.png`,
-        // todo add pokemon first type name to these 4 below
         spriteBack: `https://kai-tw.github.io/PokeCard/backgrounds/${'grass'}.png`,
         Icon: IconFiles[IconNames['grass']],
         types: [
@@ -28,9 +54,7 @@ const ListData = {
       {
         name: 'pokemon2',
         details: ['detail1', 'detail2', 'detail3'],
-        // todo add pokemon id to below url
         spriteUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${'2'}.png`,
-        // todo add pokemon first type name to these 4 below
         spriteBack: `https://kai-tw.github.io/PokeCard/backgrounds/${'poison'}.png`,
         Icon: IconFiles[IconNames['poison']],
         types: [
@@ -41,7 +65,7 @@ const ListData = {
     ],
   },
   decorators: [
-    (Story) => (
+    (Story: React.FC<any>) => (
       <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
         <Story />
       </View>
