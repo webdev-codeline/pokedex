@@ -1,13 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
+import Constants from 'expo-constants';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+function App() {
   return (
     <View style={styles.container}>
-      <Text>Welcome to Pokedex</Text>
-      <StatusBar style='auto' />
+      <Text>Open up App.tsx to start working on your app!</Text>
     </View>
   );
+}
+
+let AppEntryPoint = App;
+
+// TODO can be validated via zod
+if (Constants?.expoConfig?.extra?.storybookEnabled === 'true') {
+  AppEntryPoint = require('./.storybook').default;
 }
 
 const styles = StyleSheet.create({
@@ -18,3 +24,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default AppEntryPoint;

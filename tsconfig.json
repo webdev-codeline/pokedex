@@ -4,6 +4,8 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
+      "react": ["./node_modules/@types/react"],
+
       "@/*": ["src/*"],
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
