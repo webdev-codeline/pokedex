@@ -13,7 +13,9 @@
       "@lib/*": ["src/lib/*"],
       "@navigation/*": ["src/navigation/*"],
       "@redux/*": ["src/redux/*"],
+      "@schemas/*": ["src/schemas/*"],
       "@screens/*": ["src/screens/*"],
+      "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"]
     }
   }
