@@ -369,7 +369,7 @@ const EvolutionTreeIcons = styled.View`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: flex-start;
   position: absolute;
   bottom: -150px;
