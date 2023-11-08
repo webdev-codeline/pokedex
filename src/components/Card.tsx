@@ -64,7 +64,7 @@ export const Card = (props: CardProps) => {
           ))}
         </TypesWrapper>
 
-        <CardName>{name}</CardName>
+        <CardName>{name.toUpperCase()}</CardName>
 
         {abilities.map((a, index) => (
           <Abilities key={index}>{a}</Abilities>
