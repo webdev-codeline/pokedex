@@ -23,8 +23,8 @@ export const HorizontalList = ({ data, title, emptyMessage }: HorizontalListProp
         <FlatList
           horizontal
           data={data}
-          renderItem={({ item: { id, abilities, name, types }, index }) => (
-            <Card key={index} id={id} abilities={abilities} name={name} types={types} />
+          renderItem={({ item: { id, abilities, name, type }, index }) => (
+            <Card key={index} id={id} abilities={abilities} name={name} type={type} />
           )}
         />
       ) : (
