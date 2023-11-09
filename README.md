@@ -80,7 +80,7 @@ Based on my assessment of the project, here are some suggestions for improvement
 
 4. Search Pagination and Virtual Scrolling: Implementing search pagination and virtual scrolling can significantly enhance the user experience by preventing large amounts of data from being loaded at once.
 
-5. UI Enhancements: Consider implementing UI changes such as splash screens, interactive animations, skeleton loading, icons, and a cohesive design language to improve the overall user experience.
+5. UI Enhancements: Consider implementing UI changes such as splash screens, interactive animations, skeleton loading, icons, and a cohesive design language to improve the overall user experience. Additionally, the UI design could be improved by considering different screen sizes and font sizes for different phones and users.
 
 6. Screen Transitions and Effects: Add transitions and effects to screens and components to create a more visually appealing and engaging user interface.
 
@@ -91,3 +91,5 @@ Based on my assessment of the project, here are some suggestions for improvement
 9. Database for Login and History: Instead of persisting history data, it would have been better to implement a login system and save the history in a database. This approach would provide more security and flexibility in managing user data.
 
 10. Clear Persisted Data: Consider adding a button or option to clear persisted data. This feature would allow users to easily reset or delete their stored data when needed.
+
+11. Internationalization and i18next: It is recommended to use internationalization (i18n) and a library like i18next. Internationalization allows for easy localization of the app, making it accessible to users from different regions and languages. i18next, specifically, provides benefits such as language detection, translation management, and support for dynamic content. By implementing i18n, the app can cater to a wider audience and enhance user engagement.
