@@ -110,7 +110,7 @@ export const Details = ({ route, navigation }: any) => {
         ) : (
           <>
             <Header>
-              <HeaderMainBG bgcolor={colors[toDarkKey(type)]}>
+              <HeaderMainBG bgcolor={colors[type]}>
                 <TypeIcon borderColor={colors[toDarkKey(type)]}>
                   <Icon width={52} height={52} />
                 </TypeIcon>
@@ -176,7 +176,7 @@ export const Details = ({ route, navigation }: any) => {
           ancestorId && (
             <EvolutionContainer
               onPress={() => onAncestorPress({ id: ancestorData?.pokemon[0]?.id ?? 1, type: pokemonAncestorType })}
-              bgcolor={colors[toDarkKey(pokemonAncestorType)]}
+              bgcolor={colors[pokemonAncestorType]}
             >
               <EvolutionTitle>Evolutions (Click For More Info)</EvolutionTitle>
 
