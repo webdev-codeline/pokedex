@@ -138,7 +138,7 @@ export const Details = ({ route, navigation }: any) => {
                   source={{
                     uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id + '.png'}`,
                   }}
-                  style={{ width: 350, height: 350 }}
+                  style={{ width: 250, height: 250 }}
                 />
 
                 <MainDetailsContainer ancestorId={ancestorId ?? null}>

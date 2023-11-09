@@ -76,11 +76,11 @@ export const TypesContainer = styled.View<{ length: number }>`
   position: absolute;
   max-width: 200px;
   top: 10px;
-  left: ${({ length }) => (length > 1 ? '-65px' : '-15px')};
+  left: ${({ length }) => (length > 1 ? '15px' : '5px')};
 `;
 
 export const Type = styled.Text<StyleInput>`
-  font-size: 24px;
+  font-size: 14px;
   margin-right: 5px;
   margin-bottom: 8px;
   padding: 2px 10px;
@@ -95,7 +95,7 @@ export const AbilitiesContainer = styled.View<StyleInput>`
   justify-content: space-evenly;
   align-items: center;
   position: absolute;
-  bottom: -140px;
+  bottom: -150px;
   left: 0px;
   width: 120px;
   height: 200px;
@@ -118,8 +118,8 @@ export const Ability = styled.Text`
 
 export const Avatar = styled.Image`
   position: absolute;
-  bottom: -70px;
-  left: 10px;
+  bottom: -50px;
+  left: 0px;
 `;
 
 export const MainDetailsContainer = styled.View<{ ancestorId: number | null }>`
@@ -134,7 +134,7 @@ export const MainDetailsContainer = styled.View<{ ancestorId: number | null }>`
 
 export const Name = styled.Text`
   color: #333;
-  font-size: 44px;
+  font-size: 32px;
   margin-bottom: 20px;
   font-weight: 700;
 `;
@@ -235,7 +235,7 @@ export const EvolutionContainer = styled.TouchableOpacity<StyleInput>`
 export const EvolutionTitle = styled.Text`
   margin-bottom: 32px;
   margin-left: 10px;
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 700;
   color: #fff;
 `;
